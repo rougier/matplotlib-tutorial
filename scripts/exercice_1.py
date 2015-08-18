@@ -1,9 +1,14 @@
-from pylab import *
+# -----------------------------------------------------------------------------
+# Copyright (c) 2015, Nicolas P. Rougier. All Rights Reserved.
+# Distributed under the (new) BSD License. See LICENSE.txt for more info.
+# -----------------------------------------------------------------------------
+import numpy as np
+import matplotlib.pyplot as plt
 
-n = 256
-X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
+X = np.linspace(-np.pi, np.pi, 256, endpoint=True)
 C,S = np.cos(X), np.sin(X)
-plot(X,C),plot(X,S)
 
-#savefig("../figures/exercice_1.png",dpi=72)
-show()
+plt.plot(X,C)
+plt.plot(X,S)
+
+plt.show()
