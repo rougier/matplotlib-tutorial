@@ -519,13 +519,11 @@ FuncAnimation object that specifies to matplotlib what is the figure to
 update, what is the update function and what is the delay between frames.</p>
 <div class="section" id="drip-drop">
 <h2>Drip drop</h2>
-<p>Let's start with a simple animation: <strong>rain</strong></p>
-<p>A very simple rain effect can be obtained by having small rings randomly
-positioned over a figure and making them to grow with time. Of course, they
-won't grow forever since the wave is supposed to dampe with time. To simulate
-that, we can use a more and more transparent color when the ring is growing, up
-to the point where it is no more visible. At this point, we remove the ring and
-create a new one.</p>
+<p>A very simple rain effect can be obtained by having small growing rings
+randomly positioned over a figure. Of course, they won't grow forever since the
+wave is supposed to damp with time. To simulate that, we can use a more and
+more transparent color as the ring is growing, up to the point where it is no
+more visible. At this point, we remove the ring and create a new one.</p>
 <p>First step is to create a blank figure:</p>
 <pre class="code python literal-block">
 <span class="comment"># New figure with white background</span>
@@ -535,10 +533,11 @@ create a new one.</p>
 <span class="name">ax</span> <span class="operator">=</span> <span class="name">fig</span><span class="operator">.</span><span class="name">add_axes</span><span class="punctuation">([</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">],</span> <span class="name">frameon</span><span class="operator">=</span><span class="name builtin pseudo">False</span><span class="punctuation">,</span> <span class="name">aspect</span><span class="operator">=</span><span class="literal number integer">1</span><span class="punctuation">)</span>
 </pre>
 <p>Next, we need to create several rings. For this, we can use the scatter plot
-object that is generally used to visualize points cloud but we can also use it
+object that is generally used to visualize points cloud, but we can also use it
 to draw rings by specifying we don't have a facecolor. We have also to take
 care of initial size and color for each ring such that we have all size between
-minium and maximum size and that the largest ring is almost transparent.</p>
+a minimum and a maximum size and also to make sure the largest ring is almost
+transparent.</p>
 <a class="reference external image-reference" href="scripts/rain-static.py"><img alt="figures/rain-static.png" class="align-right" src="figures/rain-static.png" /></a>
 <pre class="code python literal-block">
 <span class="comment"># Number of ring</span>
@@ -606,6 +605,111 @@ the animation and display the result or save it as a movie:</p>
 </div>
 <div class="section" id="earthquakes">
 <h2>Earthquakes</h2>
+<p>We'll now use the rain animation to visualize earthquakes on the planet from
+the last 30 days. The USGS Earthquake Hazards Program is part of the National
+Earthquake Hazards Reduction Program (NEHRP) and provides several data on their
+<a class="reference external" href="http://earthquake.usgs.gov">website</a>. Those data are sorted according to
+eartquakes magnitude, ranging from significant only down to all earthquakes,
+major or minor. You would be surprised by the number of minor earthquakes
+happening every hour on the planet. Since this would represent too much data
+for us, we'll stick to earthquakes with magnitude &gt; 4.5. At the time of writing,
+this already represent more than 300 earthquakes in the last 30 days.</p>
+<p>First step is to read and convert data. We'll use the <cite>urllib</cite> library that
+allows to open and read remote data. Data on the website use the <cite>CSV</cite> format
+whose content is given by the first line:</p>
+<pre class="literal-block">
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type
+2015-08-17T13:49:17.320Z,37.8365,-122.2321667,4.82,4.01,mw,...
+2015-08-15T07:47:06.640Z,-10.9045,163.8766,6.35,6.6,mwp,...
+</pre>
+<p>We are only interested in latitude, longitude and magnitude and we won't parse
+time of event (ok, that's bad, feel free to send me a PR).</p>
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">urllib</span>
+<span class="keyword namespace">from</span> <span class="name namespace">mpl_toolkits.basemap</span> <span class="keyword namespace">import</span> <span class="name">Basemap</span>
+
+<span class="comment"># -&gt; http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php</span>
+<span class="name">feed</span> <span class="operator">=</span> <span class="literal string">&quot;http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/&quot;</span>
+
+<span class="comment"># Significant earthquakes in the last 30 days</span>
+<span class="comment"># url = urllib.urlopen(feed + &quot;significant_month.csv&quot;)</span>
+
+<span class="comment"># Magnitude &gt; 4.5</span>
+<span class="name">url</span> <span class="operator">=</span> <span class="name">urllib</span><span class="operator">.</span><span class="name">urlopen</span><span class="punctuation">(</span><span class="name">feed</span> <span class="operator">+</span> <span class="literal string">&quot;4.5_month.csv&quot;</span><span class="punctuation">)</span>
+
+<span class="comment"># Magnitude &gt; 2.5</span>
+<span class="comment"># url = urllib.urlopen(feed + &quot;2.5_month.csv&quot;)</span>
+
+<span class="comment"># Magnitude &gt; 1.0</span>
+<span class="comment"># url = urllib.urlopen(feed + &quot;1.0_month.csv&quot;)</span>
+
+<span class="comment"># Reading and storage of data</span>
+<span class="name">data</span> <span class="operator">=</span> <span class="name">url</span><span class="operator">.</span><span class="name">read</span><span class="punctuation">()</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string">'</span><span class="literal string escape">\n</span><span class="literal string">'</span><span class="punctuation">)[</span><span class="operator">+</span><span class="literal number integer">1</span><span class="punctuation">:</span><span class="operator">-</span><span class="literal number integer">1</span><span class="punctuation">]</span>
+<span class="name">E</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">zeros</span><span class="punctuation">(</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">data</span><span class="punctuation">),</span> <span class="name">dtype</span><span class="operator">=</span><span class="punctuation">[(</span><span class="literal string">'position'</span><span class="punctuation">,</span>  <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">),</span>
+                               <span class="punctuation">(</span><span class="literal string">'magnitude'</span><span class="punctuation">,</span> <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">1</span><span class="punctuation">)])</span>
+
+<span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">data</span><span class="punctuation">)):</span>
+    <span class="name">row</span> <span class="operator">=</span> <span class="name">data</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">]</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string">','</span><span class="punctuation">)</span>
+    <span class="name">E</span><span class="punctuation">[</span><span class="literal string">'position'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name builtin">float</span><span class="punctuation">(</span><span class="name">row</span><span class="punctuation">[</span><span class="literal number integer">2</span><span class="punctuation">]),</span><span class="name builtin">float</span><span class="punctuation">(</span><span class="name">row</span><span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">])</span>
+    <span class="name">E</span><span class="punctuation">[</span><span class="literal string">'magnitude'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name builtin">float</span><span class="punctuation">(</span><span class="name">row</span><span class="punctuation">[</span><span class="literal number integer">4</span><span class="punctuation">])</span>
+</pre>
+<p>Now, we need to draw earth on a figure to show precisely where the earthquake
+center is and to translate latitude/longitude in some coordinates matplotlib
+can handle. Fortunately, there is the <a class="reference external" href="http://matplotlib.org/basemap/">basemap</a> project (that tends to be replaced by the
+more complete <a class="reference external" href="http://scitools.org.uk/cartopy/">cartopy</a>) that is really
+simmple to install and to use. First step is to define a projection to draw the
+earth onto a screen (there exists many different projections) and we'll stick
+to the <cite>mill</cite> projection which is rather standard for non-specialist like me.</p>
+<pre class="code python literal-block">
+<span class="name">fig</span> <span class="operator">=</span> <span class="name">plt</span><span class="operator">.</span><span class="name">figure</span><span class="punctuation">(</span><span class="name">figsize</span><span class="operator">=</span><span class="punctuation">(</span><span class="literal number integer">14</span><span class="punctuation">,</span><span class="literal number integer">10</span><span class="punctuation">))</span>
+<span class="name">ax</span> <span class="operator">=</span> <span class="name">plt</span><span class="operator">.</span><span class="name">subplot</span><span class="punctuation">(</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">)</span>
+
+<span class="name">earth</span> <span class="operator">=</span> <span class="name">Basemap</span><span class="punctuation">(</span><span class="name">projection</span><span class="operator">=</span><span class="literal string">'mill'</span><span class="punctuation">)</span>
+</pre>
+<p>Next, we request to draw coastline and fill continents:</p>
+<pre class="code python literal-block">
+<span class="name">earth</span><span class="operator">.</span><span class="name">drawcoastlines</span><span class="punctuation">(</span><span class="name">color</span><span class="operator">=</span><span class="literal string">'0.50'</span><span class="punctuation">,</span> <span class="name">linewidth</span><span class="operator">=</span><span class="literal number float">0.25</span><span class="punctuation">)</span>
+<span class="name">earth</span><span class="operator">.</span><span class="name">fillcontinents</span><span class="punctuation">(</span><span class="name">color</span><span class="operator">=</span><span class="literal string">'0.95'</span><span class="punctuation">)</span>
+</pre>
+<p>The <cite>earth</cite> object will also be used to translate coordinate quite
+automatically. We are almost finished. Last step is to adapt the rain code and
+put some eye candy:</p>
+<pre class="code python literal-block">
+<span class="name">P</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">zeros</span><span class="punctuation">(</span><span class="literal number integer">50</span><span class="punctuation">,</span> <span class="name">dtype</span><span class="operator">=</span><span class="punctuation">[(</span><span class="literal string">'position'</span><span class="punctuation">,</span> <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">),</span>
+                         <span class="punctuation">(</span><span class="literal string">'size'</span><span class="punctuation">,</span>     <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">1</span><span class="punctuation">),</span>
+                         <span class="punctuation">(</span><span class="literal string">'growth'</span><span class="punctuation">,</span>   <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">1</span><span class="punctuation">),</span>
+                         <span class="punctuation">(</span><span class="literal string">'color'</span><span class="punctuation">,</span>    <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">4</span><span class="punctuation">)])</span>
+<span class="name">scat</span> <span class="operator">=</span> <span class="name">ax</span><span class="operator">.</span><span class="name">scatter</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">[</span><span class="literal string">'position'</span><span class="punctuation">][:,</span><span class="literal number integer">0</span><span class="punctuation">],</span> <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'position'</span><span class="punctuation">][:,</span><span class="literal number integer">1</span><span class="punctuation">],</span> <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'size'</span><span class="punctuation">],</span> <span class="name">lw</span><span class="operator">=</span><span class="literal number float">0.5</span><span class="punctuation">,</span>
+                  <span class="name">edgecolors</span> <span class="operator">=</span> <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'color'</span><span class="punctuation">],</span> <span class="name">facecolors</span><span class="operator">=</span><span class="literal string">'None'</span><span class="punctuation">,</span> <span class="name">zorder</span><span class="operator">=</span><span class="literal number integer">10</span><span class="punctuation">)</span>
+
+<span class="keyword">def</span> <span class="name function">update</span><span class="punctuation">(</span><span class="name">frame</span><span class="punctuation">):</span>
+    <span class="name">current</span> <span class="operator">=</span> <span class="name">frame</span> <span class="operator">%</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">E</span><span class="punctuation">)</span>
+    <span class="name">i</span> <span class="operator">=</span> <span class="name">frame</span> <span class="operator">%</span> <span class="name builtin">len</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">)</span>
+
+    <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'color'</span><span class="punctuation">][:,</span><span class="literal number integer">3</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">maximum</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span> <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'color'</span><span class="punctuation">][:,</span><span class="literal number integer">3</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="literal number float">1.0</span><span class="operator">/</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">))</span>
+    <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'size'</span><span class="punctuation">]</span> <span class="operator">+=</span> <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'growth'</span><span class="punctuation">]</span>
+
+    <span class="name">magnitude</span> <span class="operator">=</span> <span class="name">E</span><span class="punctuation">[</span><span class="literal string">'magnitude'</span><span class="punctuation">][</span><span class="name">current</span><span class="punctuation">]</span>
+    <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'position'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name builtin">map</span><span class="punctuation">(</span><span class="operator">*</span><span class="name">E</span><span class="punctuation">[</span><span class="literal string">'position'</span><span class="punctuation">][</span><span class="name">current</span><span class="punctuation">])</span>
+    <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'size'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="literal number integer">5</span>
+    <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'growth'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">]</span><span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">exp</span><span class="punctuation">(</span><span class="name">magnitude</span><span class="punctuation">)</span> <span class="operator">*</span> <span class="literal number float">0.1</span>
+
+    <span class="keyword">if</span> <span class="name">magnitude</span> <span class="operator">&lt;</span> <span class="literal number integer">6</span><span class="punctuation">:</span>
+        <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'color'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">]</span>    <span class="operator">=</span> <span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span>
+    <span class="keyword">else</span><span class="punctuation">:</span>
+        <span class="name">P</span><span class="punctuation">[</span><span class="literal string">'color'</span><span class="punctuation">][</span><span class="name">i</span><span class="punctuation">]</span>    <span class="operator">=</span> <span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span>
+    <span class="name">scat</span><span class="operator">.</span><span class="name">set_edgecolors</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">[</span><span class="literal string">'color'</span><span class="punctuation">])</span>
+    <span class="name">scat</span><span class="operator">.</span><span class="name">set_facecolors</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">[</span><span class="literal string">'color'</span><span class="punctuation">]</span><span class="operator">*</span><span class="punctuation">(</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number float">0.25</span><span class="punctuation">))</span>
+    <span class="name">scat</span><span class="operator">.</span><span class="name">set_sizes</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">[</span><span class="literal string">'size'</span><span class="punctuation">])</span>
+    <span class="name">scat</span><span class="operator">.</span><span class="name">set_offsets</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">[</span><span class="literal string">'position'</span><span class="punctuation">])</span>
+    <span class="keyword">return</span> <span class="name">scat</span><span class="punctuation">,</span>
+
+
+<span class="name">animation</span> <span class="operator">=</span> <span class="name">FuncAnimation</span><span class="punctuation">(</span><span class="name">fig</span><span class="punctuation">,</span> <span class="name">update</span><span class="punctuation">,</span> <span class="name">interval</span><span class="operator">=</span><span class="literal number integer">10</span><span class="punctuation">)</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">show</span><span class="punctuation">()</span>
+</pre>
+<p>If eveything went well, you should obtain something like this (with animation):</p>
+<a class="reference external image-reference" href="scripts/earthquakes.py"><img alt="figures/earthquakes.png" src="figures/earthquakes.png" style="width: 50%;" /></a>
 </div>
 </div>
 <div class="section" id="other-types-of-plots">

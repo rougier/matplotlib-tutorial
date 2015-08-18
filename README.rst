@@ -646,10 +646,133 @@ the animation and display the result or save it as a movie:
 Earthquakes
 -----------
 
+We'll now use the rain animation to visualize earthquakes on the planet from
+the last 30 days. The USGS Earthquake Hazards Program is part of the National
+Earthquake Hazards Reduction Program (NEHRP) and provides several data on their
+`website <http://earthquake.usgs.gov>`_. Those data are sorted according to
+eartquakes magnitude, ranging from significant only down to all earthquakes,
+major or minor. You would be surprised by the number of minor earthquakes
+happening every hour on the planet. Since this would represent too much data
+for us, we'll stick to earthquakes with magnitude > 4.5. At the time of writing,
+this already represent more than 300 earthquakes in the last 30 days.
 
 
+First step is to read and convert data. We'll use the `urllib` library that
+allows to open and read remote data. Data on the website use the `CSV` format
+whose content is given by the first line::
+
+  time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type
+  2015-08-17T13:49:17.320Z,37.8365,-122.2321667,4.82,4.01,mw,...
+  2015-08-15T07:47:06.640Z,-10.9045,163.8766,6.35,6.6,mwp,...
+
+We are only interested in latitude, longitude and magnitude and we won't parse
+time of event (ok, that's bad, feel free to send me a PR).
+  
+
+.. code:: python
+
+   import urllib
+   from mpl_toolkits.basemap import Basemap
+
+   # -> http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php
+   feed = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/"
+
+   # Significant earthquakes in the last 30 days
+   # url = urllib.urlopen(feed + "significant_month.csv")
+
+   # Magnitude > 4.5
+   url = urllib.urlopen(feed + "4.5_month.csv")
+
+   # Magnitude > 2.5
+   # url = urllib.urlopen(feed + "2.5_month.csv")
+
+   # Magnitude > 1.0
+   # url = urllib.urlopen(feed + "1.0_month.csv")
+
+   # Reading and storage of data
+   data = url.read().split('\n')[+1:-1]
+   E = np.zeros(len(data), dtype=[('position',  float, 2),
+                                  ('magnitude', float, 1)])
+
+   for i in range(len(data)):
+       row = data[i].split(',')
+       E['position'][i] = float(row[2]),float(row[1])
+       E['magnitude'][i] = float(row[4])
 
 
+Now, we need to draw earth on a figure to show precisely where the earthquake
+center is and to translate latitude/longitude in some coordinates matplotlib
+can handle. Fortunately, there is the `basemap
+<http://matplotlib.org/basemap/>`_ project (that tends to be replaced by the
+more complete `cartopy <http://scitools.org.uk/cartopy/>`_) that is really
+simmple to install and to use. First step is to define a projection to draw the
+earth onto a screen (there exists many different projections) and we'll stick
+to the `mill` projection which is rather standard for non-specialist like me.
+       
+
+.. code:: python
+
+   fig = plt.figure(figsize=(14,10))
+   ax = plt.subplot(1,1,1)
+
+   earth = Basemap(projection='mill')
+
+
+Next, we request to draw coastline and fill continents:
+
+.. code:: python
+          
+   earth.drawcoastlines(color='0.50', linewidth=0.25)
+   earth.fillcontinents(color='0.95')
+
+The `earth` object will also be used to translate coordinate quite
+automatically. We are almost finished. Last step is to adapt the rain code and
+put some eye candy:
+
+
+.. code:: python
+
+   P = np.zeros(50, dtype=[('position', float, 2),
+                            ('size',     float, 1),
+                            ('growth',   float, 1),
+                            ('color',    float, 4)])
+   scat = ax.scatter(P['position'][:,0], P['position'][:,1], P['size'], lw=0.5,
+                     edgecolors = P['color'], facecolors='None', zorder=10)
+
+   def update(frame):
+       current = frame % len(E)
+       i = frame % len(P)
+
+       P['color'][:,3] = np.maximum(0, P['color'][:,3] - 1.0/len(P))
+       P['size'] += P['growth']
+
+       magnitude = E['magnitude'][current]
+       P['position'][i] = map(*E['position'][current])
+       P['size'][i] = 5
+       P['growth'][i]= np.exp(magnitude) * 0.1
+
+       if magnitude < 6:
+           P['color'][i]    = 0,0,1,1
+       else:
+           P['color'][i]    = 1,0,0,1
+       scat.set_edgecolors(P['color'])
+       scat.set_facecolors(P['color']*(1,1,1,0.25))
+       scat.set_sizes(P['size'])
+       scat.set_offsets(P['position'])
+       return scat,
+
+       
+   animation = FuncAnimation(fig, update, interval=10)
+   plt.show()
+
+
+If eveything went well, you should obtain something like this (with animation):
+
+.. image:: figures/earthquakes.png
+   :target: scripts/earthquakes.py
+   :width: 50%
+
+   
 Other Types of Plots
 ====================
 
