@@ -65,6 +65,6 @@ def update(frame):
     return scat,
 
 animation = FuncAnimation(fig, update, interval=10)
-animation.save('../figures/rain.gif', writer='imagemagick', fps=30, dpi=72)
+# animation.save('../figures/rain.gif', writer='imagemagick', fps=30, dpi=72)
 plt.show()
 

@@ -536,14 +536,11 @@ update, what is the update function and what is the delay between frames.
 Drip drop
 ---------
 
-Let's start with a simple animation: **rain**
-
-A very simple rain effect can be obtained by having small rings randomly
-positioned over a figure and making them to grow with time. Of course, they
-won't grow forever since the wave is supposed to dampe with time. To simulate
-that, we can use a more and more transparent color when the ring is growing, up
-to the point where it is no more visible. At this point, we remove the ring and
-create a new one.
+A very simple rain effect can be obtained by having small growing rings
+randomly positioned over a figure. Of course, they won't grow forever since the
+wave is supposed to damp with time. To simulate that, we can use a more and
+more transparent color as the ring is growing, up to the point where it is no
+more visible. At this point, we remove the ring and create a new one.
 
 First step is to create a blank figure:
 
@@ -557,10 +554,11 @@ First step is to create a blank figure:
 
    
 Next, we need to create several rings. For this, we can use the scatter plot
-object that is generally used to visualize points cloud but we can also use it
+object that is generally used to visualize points cloud, but we can also use it
 to draw rings by specifying we don't have a facecolor. We have also to take
 care of initial size and color for each ring such that we have all size between
-minium and maximum size and that the largest ring is almost transparent.
+a minimum and a maximum size and also to make sure the largest ring is almost
+transparent.
 
 
 .. image:: figures/rain-static.png

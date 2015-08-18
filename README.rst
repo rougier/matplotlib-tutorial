@@ -1,28 +1,23 @@
-===================================
+===================
 Matplotlib tutorial
-===================================
+===================
 
-------------------------------------------------
-Nicolas P. Rougier - Euroscipy 2012 - Prace 2013
-------------------------------------------------
+------------------
+Nicolas P. Rougier
+------------------
 
 .. contents::
    :local:
-   :depth: 2
+   :depth: 1
 
-This tutorial is based on Mike Müller's `tutorial
-<http://scipy-lectures.github.com/intro/matplotlib/matplotlib.html>`_ available
-from the `scipy lecture notes <http://scipy-lectures.github.com>`_.
 
-Sources are available `here <matplotlib.rst>`_. Figures are in the `figures
-<figures/>`_ directory and all scripts are located in the `scripts <scripts/>`_
-directory. Github repository is `here
-<https://github.com/rougier/scipy-lecture-notes/tree/euroscipy-2012/intro/matplotlib>`_
+All code and material is licensed under a `Creative Commons
+Attribution-ShareAlike 4.0
+<http://creativecommons.org/licenses/by-sa/4.0>`_. Sources are available from
+`github <https://github.com/rougier/matplotlib-tutorial>`_
 
-All code and material is licensed under a Creative Commons Attribution 3.0
-United States License (CC-by) http://creativecommons.org/licenses/by/3.0/us
+Make sure to also read `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_, N.P. Rougier, M. Droettboom & P. Bourne, Plos Computational Biology 10(9): e1003833. doi:10.1371/journal.pcbi.1003833.
 
-Many thanks to **Bill Wing** and **Christoph Deil** for review and corrections.
 
 
 Introduction
@@ -42,13 +37,13 @@ shell commands, improved debugging and many more. When we start it with the
 command line argument -pylab (--pylab since IPython version 0.12), it allows
 interactive matplotlib sessions that have Matlab/Mathematica-like functionality.
 
-pylab
------
+pyplot
+------
 
-pylab provides a procedural interface to the matplotlib object-oriented
+pyplot provides a convenient interface to the matplotlib object-oriented
 plotting library. It is modeled closely after Matlab(TM). Therefore, the
-majority of plotting commands in pylab have Matlab(TM) analogs with similar
-arguments.  Important commands are explained with interactive examples.
+majority of plotting commands in pyplot have Matlab(TM) analogs with similar
+arguments. Important commands are explained with interactive examples.
 
 
 
@@ -64,7 +59,7 @@ First step is to get the data for the sine and cosine functions:
 
 ::
 
-   from pylab import *
+   import numpy as np
 
    X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
    C,S = np.cos(X), np.sin(X)
@@ -73,25 +68,7 @@ First step is to get the data for the sine and cosine functions:
 X is now a numpy array with 256 values ranging from -π to +π (included). C is
 the cosine (256 values) and S is the sine (256 values).
 
-To run the example, you can type them in an IPython interactive session
-
-    $ ipython --pylab
-
-This brings us to the IPython prompt:
-
-::
-
-    IPython 0.13 -- An enhanced Interactive Python.
-    ?       -> Introduction to IPython's features.
-    %magic  -> Information about IPython's 'magic' % functions.
-    help    -> Python's own help system.
-    object? -> Details about 'object'. ?object also works, ?? prints more.
-    
-    Welcome to pylab, a matplotlib-based Python environment.
-    For more information, type 'help(pylab)'.
-
-
-or you can download each of the examples and run it using regular python::
+To run the example, you can download each of the examples and run it using::
 
     $ python exercice_1.py
 
@@ -118,20 +95,9 @@ are rather good in most cases, you may want to modify some properties for
 specific cases.
 
 
-::
-
-   from pylab import *
-
-   X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
-   C,S = np.cos(X), np.sin(X)
-
-   plot(X,C)
-   plot(X,S)
-
-   show()
-
-
-
+.. include:: scripts/exercice_1.py
+   :code: python
+   :start-line: 4
 
 
 Instantiating defaults
@@ -151,43 +117,10 @@ that influence the appearance of the plot. The settings have been explicitly
 set to their default values, but now you can interactively play with the values
 to explore their affect (see `Line properties`_ and `Line styles`_ below).
 
-::
-
-   # Import everything from matplotlib (numpy is accessible via 'np' alias)
-   from pylab import *
-
-   # Create a new figure of size 8x6 points, using 80 dots per inch
-   figure(figsize=(8,6), dpi=80)
-
-   # Create a new subplot from a grid of 1x1
-   subplot(1,1,1)
-
-   X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
-   C,S = np.cos(X), np.sin(X)
-
-   # Plot cosine using blue color with a continuous line of width 1 (pixels)
-   plot(X, C, color="blue", linewidth=1.0, linestyle="-")
-
-   # Plot sine using green color with a continuous line of width 1 (pixels)
-   plot(X, S, color="green", linewidth=1.0, linestyle="-")
-
-   # Set x limits
-   xlim(-4.0,4.0)
-
-   # Set x ticks
-   xticks(np.linspace(-4,4,9,endpoint=True))
-
-   # Set y limits
-   ylim(-1.0,1.0)
-
-   # Set y ticks
-   yticks(np.linspace(-1,1,5,endpoint=True))
-
-   # Save figure using 72 dots per inch
-   # savefig("exercice_2.png",dpi=72)
-
-   # Show result on screen
-   show()
+.. include:: scripts/exercice_2.py
+   :code: python
+   :start-line: 4
+             
 
 
 Changing colors and line widths
@@ -210,9 +143,9 @@ size to make it more horizontal.
 ::
 
    ...
-   figure(figsize=(10,6), dpi=80)
-   plot(X, C, color="blue", linewidth=2.5, linestyle="-")
-   plot(X, S, color="red",  linewidth=2.5, linestyle="-")
+   plt.figure(figsize=(10,6), dpi=80)
+   plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-")
+   plt.plot(X, S, color="red",  linewidth=2.5, linestyle="-")
    ...
 
 
@@ -236,8 +169,8 @@ in order to clearly see all data points.
 ::
 
    ...
-   xlim(X.min()*1.1, X.max()*1.1)
-   ylim(C.min()*1.1, C.max()*1.1)
+   plt.xlim(X.min()*1.1, X.max()*1.1)
+   plt.ylim(C.min()*1.1, C.max()*1.1)
    ...
 
 
@@ -264,8 +197,8 @@ these values.
 ::
 
    ...
-   xticks( [-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
-   yticks([-1, 0, +1])
+   plt.xticks( [-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
+   plt.yticks([-1, 0, +1])
    ...
 
 
@@ -294,10 +227,10 @@ list. Note that we'll use latex to allow for nice rendering of the label.
 ::
 
    ...
-   xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
+   plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
           [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
 
-   yticks([-1, 0, +1],
+   plt.yticks([-1, 0, +1],
           [r'$-1$', r'$0$', r'$+1$'])
    ...
 
@@ -326,7 +259,7 @@ left ones to coordinate 0 in data space coordinates.
 ::
 
    ...
-   ax = gca()
+   ax = plt.gca()
    ax.spines['right'].set_color('none')
    ax.spines['top'].set_color('none')
    ax.xaxis.set_ticks_position('bottom')
@@ -359,10 +292,10 @@ commands.
 ::
 
    ...
-   plot(X, C, color="blue", linewidth=2.5, linestyle="-", label="cosine")
-   plot(X, S, color="red",  linewidth=2.5, linestyle="-", label="sine")
+   plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-", label="cosine")
+   plt.plot(X, S, color="red",  linewidth=2.5, linestyle="-", label="sine")
 
-   legend(loc='upper left')
+   plt.legend(loc='upper left', frameon=False)
    ...
 
 
@@ -390,21 +323,21 @@ the annotate command to display some text with an arrow.
    ...
 
    t = 2*np.pi/3
-   plot([t,t],[0,np.cos(t)], color ='blue', linewidth=2.5, linestyle="--")
-   scatter([t,],[np.cos(t),], 50, color ='blue')
+   plt.plot([t,t],[0,np.cos(t)], color ='blue', linewidth=2.5, linestyle="--")
+   plt.scatter([t,],[np.cos(t),], 50, color ='blue')
 
-   annotate(r'$\sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
-            xy=(t, np.sin(t)), xycoords='data',
-            xytext=(+10, +30), textcoords='offset points', fontsize=16,
-            arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+   plt.annotate(r'$\sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
+                xy=(t, np.sin(t)), xycoords='data',
+                xytext=(+10, +30), textcoords='offset points', fontsize=16,
+                arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
 
-   plot([t,t],[0,np.sin(t)], color ='red', linewidth=2.5, linestyle="--")
-   scatter([t,],[np.sin(t),], 50, color ='red')
+   plt.plot([t,t],[0,np.sin(t)], color ='red', linewidth=2.5, linestyle="--")
+   plt.scatter([t,],[np.sin(t),], 50, color ='red')
 
-   annotate(r'$\cos(\frac{2\pi}{3})=-\frac{1}{2}$',
-            xy=(t, np.cos(t)), xycoords='data',
-            xytext=(-90, -50), textcoords='offset points', fontsize=16,
-            arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+   plt.annotate(r'$\cos(\frac{2\pi}{3})=-\frac{1}{2}$',
+                xy=(t, np.cos(t)), xycoords='data',
+                xytext=(-90, -50), textcoords='offset points', fontsize=16,
+                arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
    ...
 
 
@@ -580,6 +513,139 @@ All of these locators derive from the base class matplotlib.ticker.Locator.
 You can make your own locator deriving from it. Handling dates as ticks can be
 especially tricky. Therefore, matplotlib provides special locators in
 matplotlib.dates.
+
+
+Animation
+=========
+
+For quite a long time, animation in matplotlib was not an easy taks and was
+done mainly through clever hacks. However, things have started to change since
+version 1.1 and the introduction of tools for creating animation very
+intuitively, with the possiblity to save them in all kind of formats (but don't
+expect to be able to run very complex animation at 60 fps though).
+
+.. admonition:: Documentation
+
+   *  See `Animation <http://matplotlib.org/api/animation_api.html>`_
+
+The most easy way to make an animation in matplotlib is to declare a
+FuncAnimation object that specifies to matplotlib what is the figure to
+update, what is the update function and what is the delay between frames.
+
+
+Drip drop
+---------
+
+A very simple rain effect can be obtained by having small growing rings
+randomly positioned over a figure. Of course, they won't grow forever since the
+wave is supposed to damp with time. To simulate that, we can use a more and
+more transparent color as the ring is growing, up to the point where it is no
+more visible. At this point, we remove the ring and create a new one.
+
+First step is to create a blank figure:
+
+.. code:: python
+
+   # New figure with white background
+   fig = plt.figure(figsize=(6,6), facecolor='white')
+
+   # New axis over the whole figure, no frame and a 1:1 aspect ratio
+   ax = fig.add_axes([0,0,1,1], frameon=False, aspect=1)
+
+   
+Next, we need to create several rings. For this, we can use the scatter plot
+object that is generally used to visualize points cloud, but we can also use it
+to draw rings by specifying we don't have a facecolor. We have also to take
+care of initial size and color for each ring such that we have all size between
+a minimum and a maximum size and also to make sure the largest ring is almost
+transparent.
+
+
+.. image:: figures/rain-static.png
+   :target: scripts/rain-static.py
+   :align: right
+
+
+.. code:: python
+
+   # Number of ring
+   n = 50
+   size_min = 50
+   size_max = 50*50
+          
+   # Ring position 
+   P = np.random.uniform(0,1,(n,2))
+
+   # Ring colors
+   C = np.ones((n,4)) * (0,0,0,1)
+   # Alpha color channel goes from 0 (transparent) to 1 (opaque)
+   C[:,3] = np.linspace(0,1,n)
+
+   # Ring sizes
+   S = np.linspace(size_min, size_max, n)
+
+   # Scatter plot
+   scat = ax.scatter(P[:,0], P[:,1], s=S, lw = 0.5,
+                     edgecolors = C, facecolors='None')
+
+   # Ensure limits are [0,1] and remove ticks
+   ax.set_xlim(0,1), ax.set_xticks([])
+   ax.set_ylim(0,1), ax.set_yticks([])
+
+
+Now, we need to write the update function for our animation. We know that at
+each time step each ring should grow be more transparent while largest ring
+should be totally transparent and thus removed. Of course, we won't actually
+remove the largest ring but re-use it to set a new ring at a new random
+position, with nominal size and color. Hence, we keep the number of ring
+constant.
+
+  
+.. image:: figures/rain.gif
+   :target: scripts/rain-dynamic.py
+   :align: right
+
+
+.. code:: python
+
+   def update(frame):
+       global P, C, S
+
+       # Every ring is made more transparent
+       C[:,3] = np.maximum(0, C[:,3] - 1.0/n)
+
+       # Each ring is made larger
+       S += (size_max - size_min) / n
+
+       # Reset ring specific ring (relative to frame number)
+       i = frame % 50
+       P[i] = np.random.uniform(0,1,2)
+       S[i] = size_min
+       C[i,3] = 1
+
+       # Update scatter object
+       scat.set_edgecolors(C)
+       scat.set_sizes(S)
+       scat.set_offsets(P)
+
+       # Return the modified object
+       return scat,
+
+Last step is to tell matplotlib to use this function as an update function for
+the animation and display the result or save it as a movie:
+
+
+.. code:: python
+
+   animation = FuncAnimation(fig, update, interval=10, blit=True, frames=200)
+   # animation.save('rain.gif', writer='imagemagick', fps=30, dpi=40)
+   plt.show()
+
+   
+   
+Earthquakes
+-----------
+
 
 
 

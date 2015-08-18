@@ -36,5 +36,5 @@ scat = ax.scatter(P[:,0], P[:,1], s=S, lw = 0.5,
 ax.set_xlim(0,1), ax.set_xticks([])
 ax.set_ylim(0,1), ax.set_yticks([])
 
-plt.savefig("../figures/rain-static.png",dpi=72)
+# plt.savefig("../figures/rain-static.png",dpi=72)
 plt.show()

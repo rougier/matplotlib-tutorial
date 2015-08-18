@@ -3,138 +3,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
 <title>Matplotlib tutorial</title>
 <link rel="stylesheet" href="dana.css" type="text/css" />
 </head>
 <body>
 <div class="document" id="matplotlib-tutorial">
 <h1 class="title">Matplotlib tutorial</h1>
-<h2 class="subtitle" id="nicolas-p-rougier-euroscipy-2012-prace-2013">Nicolas P. Rougier - Euroscipy 2012 - Prace 2013</h2>
+<h2 class="subtitle" id="nicolas-p-rougier">Nicolas P. Rougier</h2>
 
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id6">Introduction</a><ul>
-<li><a class="reference internal" href="#ipython-and-the-pylab-mode" id="id7">IPython and the pylab mode</a></li>
-<li><a class="reference internal" href="#pylab" id="id8">pylab</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#simple-plot" id="id9">Simple plot</a><ul>
-<li><a class="reference internal" href="#using-defaults" id="id10">Using defaults</a></li>
-<li><a class="reference internal" href="#instantiating-defaults" id="id11">Instantiating defaults</a></li>
-<li><a class="reference internal" href="#changing-colors-and-line-widths" id="id12">Changing colors and line widths</a></li>
-<li><a class="reference internal" href="#setting-limits" id="id13">Setting limits</a></li>
-<li><a class="reference internal" href="#setting-ticks" id="id14">Setting ticks</a></li>
-<li><a class="reference internal" href="#setting-tick-labels" id="id15">Setting tick labels</a></li>
-<li><a class="reference internal" href="#moving-spines" id="id16">Moving spines</a></li>
-<li><a class="reference internal" href="#adding-a-legend" id="id17">Adding a legend</a></li>
-<li><a class="reference internal" href="#annotate-some-points" id="id18">Annotate some points</a></li>
-<li><a class="reference internal" href="#devil-is-in-the-details" id="id19">Devil is in the details</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#figures-subplots-axes-and-ticks" id="id20">Figures, Subplots, Axes and Ticks</a><ul>
-<li><a class="reference internal" href="#id4" id="id21">Figures</a></li>
-<li><a class="reference internal" href="#subplots" id="id22">Subplots</a></li>
-<li><a class="reference internal" href="#axes" id="id23">Axes</a></li>
-<li><a class="reference internal" href="#ticks" id="id24">Ticks</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#other-types-of-plots" id="id25">Other Types of Plots</a><ul>
-<li><a class="reference internal" href="#regular-plots" id="id26">Regular Plots</a></li>
-<li><a class="reference internal" href="#scatter-plots" id="id27">Scatter Plots</a></li>
-<li><a class="reference internal" href="#bar-plots" id="id28">Bar Plots</a></li>
-<li><a class="reference internal" href="#contour-plots" id="id29">Contour Plots</a></li>
-<li><a class="reference internal" href="#imshow" id="id30">Imshow</a></li>
-<li><a class="reference internal" href="#pie-charts" id="id31">Pie Charts</a></li>
-<li><a class="reference internal" href="#quiver-plots" id="id32">Quiver Plots</a></li>
-<li><a class="reference internal" href="#grids" id="id33">Grids</a></li>
-<li><a class="reference internal" href="#multi-plots" id="id34">Multi Plots</a></li>
-<li><a class="reference internal" href="#polar-axis" id="id35">Polar Axis</a></li>
-<li><a class="reference internal" href="#d-plots" id="id36">3D Plots</a></li>
-<li><a class="reference internal" href="#text" id="id37">Text</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#beyond-this-tutorial" id="id38">Beyond this tutorial</a><ul>
-<li><a class="reference internal" href="#tutorials" id="id39">Tutorials</a></li>
-<li><a class="reference internal" href="#matplotlib-documentation" id="id40">Matplotlib documentation</a></li>
-<li><a class="reference internal" href="#code-documentation" id="id41">Code documentation</a></li>
-<li><a class="reference internal" href="#galleries" id="id42">Galleries</a></li>
-<li><a class="reference internal" href="#mailing-lists" id="id43">Mailing lists</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#quick-references" id="id44">Quick references</a><ul>
-<li><a class="reference internal" href="#line-properties" id="id45">Line properties</a></li>
-<li><a class="reference internal" href="#line-styles" id="id46">Line styles</a></li>
-<li><a class="reference internal" href="#markers" id="id47">Markers</a></li>
-<li><a class="reference internal" href="#colormaps" id="id48">Colormaps</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#introduction" id="id4">Introduction</a></li>
+<li><a class="reference internal" href="#simple-plot" id="id5">Simple plot</a></li>
+<li><a class="reference internal" href="#figures-subplots-axes-and-ticks" id="id6">Figures, Subplots, Axes and Ticks</a></li>
+<li><a class="reference internal" href="#animation" id="id7">Animation</a></li>
+<li><a class="reference internal" href="#other-types-of-plots" id="id8">Other Types of Plots</a></li>
+<li><a class="reference internal" href="#beyond-this-tutorial" id="id9">Beyond this tutorial</a></li>
+<li><a class="reference internal" href="#quick-references" id="id10">Quick references</a></li>
 </ul>
 </div>
-<p>This tutorial is based on Mike Müller's <a class="reference external" href="http://scipy-lectures.github.com/intro/matplotlib/matplotlib.html">tutorial</a> available
-from the <a class="reference external" href="http://scipy-lectures.github.com">scipy lecture notes</a>.</p>
-<p>Sources are available <a class="reference external" href="matplotlib.rst">here</a>. Figures are in the <a class="reference external" href="figures/">figures</a> directory and all scripts are located in the <a class="reference external" href="scripts/">scripts</a>
-directory. Github repository is <a class="reference external" href="https://github.com/rougier/scipy-lecture-notes/tree/euroscipy-2012/intro/matplotlib">here</a></p>
-<p>All code and material is licensed under a Creative Commons Attribution 3.0
-United States License (CC-by) <a class="reference external" href="http://creativecommons.org/licenses/by/3.0/us">http://creativecommons.org/licenses/by/3.0/us</a></p>
-<p>Many thanks to <strong>Bill Wing</strong> and <strong>Christoph Deil</strong> for review and corrections.</p>
+<p>All code and material is licensed under a <a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0">Creative Commons
+Attribution-ShareAlike 4.0</a>. Sources are available from
+<a class="reference external" href="https://github.com/rougier/matplotlib-tutorial">github</a></p>
+<p>Make sure to also read <a class="reference external" href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833">Ten simple rules for better figures</a>, N.P. Rougier, M. Droettboom &amp; P. Bourne, Plos Computational Biology 10(9): e1003833. doi:10.1371/journal.pcbi.1003833.</p>
 <div class="section" id="introduction">
-<h1><a class="toc-backref" href="#id6">Introduction</a></h1>
+<h1><a class="toc-backref" href="#id4">Introduction</a></h1>
 <p>matplotlib is probably the single most used Python package for 2D-graphics. It
 provides both a very quick way to visualize data from Python and
 publication-quality figures in many formats.  We are going to explore
 matplotlib in interactive mode covering most common cases.</p>
 <div class="section" id="ipython-and-the-pylab-mode">
-<h2><a class="toc-backref" href="#id7">IPython and the pylab mode</a></h2>
+<h2>IPython and the pylab mode</h2>
 <p><a class="reference external" href="http://ipython.org/">IPython</a> is an enhanced interactive Python shell that
 has lots of interesting features including named inputs and outputs, access to
 shell commands, improved debugging and many more. When we start it with the
 command line argument -pylab (--pylab since IPython version 0.12), it allows
 interactive matplotlib sessions that have Matlab/Mathematica-like functionality.</p>
 </div>
-<div class="section" id="pylab">
-<h2><a class="toc-backref" href="#id8">pylab</a></h2>
-<p>pylab provides a procedural interface to the matplotlib object-oriented
+<div class="section" id="pyplot">
+<h2>pyplot</h2>
+<p>pyplot provides a convenient interface to the matplotlib object-oriented
 plotting library. It is modeled closely after Matlab(TM). Therefore, the
-majority of plotting commands in pylab have Matlab(TM) analogs with similar
-arguments.  Important commands are explained with interactive examples.</p>
+majority of plotting commands in pyplot have Matlab(TM) analogs with similar
+arguments. Important commands are explained with interactive examples.</p>
 </div>
 </div>
 <div class="section" id="simple-plot">
-<h1><a class="toc-backref" href="#id9">Simple plot</a></h1>
+<h1><a class="toc-backref" href="#id5">Simple plot</a></h1>
 <p>In this section, we want to draw the cosine and sine functions on the same
 plot. Starting from the default settings, we'll enrich the figure step by step
 to make it nicer.</p>
 <p>First step is to get the data for the sine and cosine functions:</p>
 <pre class="literal-block">
-from pylab import *
+import numpy as np
 
 X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
 C,S = np.cos(X), np.sin(X)
 </pre>
 <p>X is now a numpy array with 256 values ranging from -π to +π (included). C is
 the cosine (256 values) and S is the sine (256 values).</p>
-<p>To run the example, you can type them in an IPython interactive session</p>
-<blockquote>
-$ ipython --pylab</blockquote>
-<p>This brings us to the IPython prompt:</p>
-<pre class="literal-block">
-IPython 0.13 -- An enhanced Interactive Python.
-?       -&gt; Introduction to IPython's features.
-%magic  -&gt; Information about IPython's 'magic' % functions.
-help    -&gt; Python's own help system.
-object? -&gt; Details about 'object'. ?object also works, ?? prints more.
-
-Welcome to pylab, a matplotlib-based Python environment.
-For more information, type 'help(pylab)'.
-</pre>
-<p>or you can download each of the examples and run it using regular python:</p>
+<p>To run the example, you can download each of the examples and run it using:</p>
 <pre class="literal-block">
 $ python exercice_1.py
 </pre>
 <p>You can get source for each step by clicking on the corresponding figure.</p>
 <div class="section" id="using-defaults">
-<h2><a class="toc-backref" href="#id10">Using defaults</a></h2>
+<h2>Using defaults</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -149,20 +84,21 @@ matplotlib: figure size and dpi, line width, color and style, axes, axis and
 grid properties, text and font properties and so on. While matplotlib defaults
 are rather good in most cases, you may want to modify some properties for
 specific cases.</p>
-<pre class="literal-block">
-from pylab import *
+<pre class="code python literal-block">
+<span class="keyword namespace">import</span> <span class="name namespace">numpy</span> <span class="keyword namespace">as</span> <span class="name namespace">np</span>
+<span class="keyword namespace">import</span> <span class="name namespace">matplotlib.pyplot</span> <span class="keyword namespace">as</span> <span class="name namespace">plt</span>
 
-X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
-C,S = np.cos(X), np.sin(X)
+<span class="name">X</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">linspace</span><span class="punctuation">(</span><span class="operator">-</span><span class="name">np</span><span class="operator">.</span><span class="name">pi</span><span class="punctuation">,</span> <span class="name">np</span><span class="operator">.</span><span class="name">pi</span><span class="punctuation">,</span> <span class="literal number integer">256</span><span class="punctuation">,</span> <span class="name">endpoint</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+<span class="name">C</span><span class="punctuation">,</span><span class="name">S</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">cos</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">),</span> <span class="name">np</span><span class="operator">.</span><span class="name">sin</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">)</span>
 
-plot(X,C)
-plot(X,S)
+<span class="name">plt</span><span class="operator">.</span><span class="name">plot</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">,</span><span class="name">C</span><span class="punctuation">)</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">plot</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">,</span><span class="name">S</span><span class="punctuation">)</span>
 
-show()
+<span class="name">plt</span><span class="operator">.</span><span class="name">show</span><span class="punctuation">()</span>
 </pre>
 </div>
 <div class="section" id="instantiating-defaults">
-<h2><a class="toc-backref" href="#id11">Instantiating defaults</a></h2>
+<h2>Instantiating defaults</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -174,46 +110,47 @@ show()
 that influence the appearance of the plot. The settings have been explicitly
 set to their default values, but now you can interactively play with the values
 to explore their affect (see <a class="reference internal" href="#line-properties">Line properties</a> and <a class="reference internal" href="#line-styles">Line styles</a> below).</p>
-<pre class="literal-block">
-# Import everything from matplotlib (numpy is accessible via 'np' alias)
-from pylab import *
+<pre class="code python literal-block">
+<span class="comment"># Imports</span>
+<span class="keyword namespace">import</span> <span class="name namespace">numpy</span> <span class="keyword namespace">as</span> <span class="name namespace">np</span>
+<span class="keyword namespace">import</span> <span class="name namespace">matplotlib.pyplot</span> <span class="keyword namespace">as</span> <span class="name namespace">plt</span>
 
-# Create a new figure of size 8x6 points, using 80 dots per inch
-figure(figsize=(8,6), dpi=80)
+<span class="comment"># Create a new figure of size 8x6 points, using 100 dots per inch</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">figure</span><span class="punctuation">(</span><span class="name">figsize</span><span class="operator">=</span><span class="punctuation">(</span><span class="literal number integer">8</span><span class="punctuation">,</span><span class="literal number integer">6</span><span class="punctuation">),</span> <span class="name">dpi</span><span class="operator">=</span><span class="literal number integer">80</span><span class="punctuation">)</span>
 
-# Create a new subplot from a grid of 1x1
-subplot(1,1,1)
+<span class="comment"># Create a new subplot from a grid of 1x1</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">subplot</span><span class="punctuation">(</span><span class="literal number integer">111</span><span class="punctuation">)</span>
 
-X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
-C,S = np.cos(X), np.sin(X)
+<span class="name">X</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">linspace</span><span class="punctuation">(</span><span class="operator">-</span><span class="name">np</span><span class="operator">.</span><span class="name">pi</span><span class="punctuation">,</span> <span class="name">np</span><span class="operator">.</span><span class="name">pi</span><span class="punctuation">,</span> <span class="literal number integer">256</span><span class="punctuation">,</span><span class="name">endpoint</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+<span class="name">C</span><span class="punctuation">,</span><span class="name">S</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">cos</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">),</span> <span class="name">np</span><span class="operator">.</span><span class="name">sin</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">)</span>
 
-# Plot cosine using blue color with a continuous line of width 1 (pixels)
-plot(X, C, color=&quot;blue&quot;, linewidth=1.0, linestyle=&quot;-&quot;)
+<span class="comment"># Plot cosine using blue color with a continuous line of width 1 (pixels)</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">plot</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">,</span> <span class="name">C</span><span class="punctuation">,</span> <span class="name">color</span><span class="operator">=</span><span class="literal string">&quot;blue&quot;</span><span class="punctuation">,</span> <span class="name">linewidth</span><span class="operator">=</span><span class="literal number float">1.0</span><span class="punctuation">,</span> <span class="name">linestyle</span><span class="operator">=</span><span class="literal string">&quot;-&quot;</span><span class="punctuation">)</span>
 
-# Plot sine using green color with a continuous line of width 1 (pixels)
-plot(X, S, color=&quot;green&quot;, linewidth=1.0, linestyle=&quot;-&quot;)
+<span class="comment"># Plot sine using green color with a continuous line of width 1 (pixels)</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">plot</span><span class="punctuation">(</span><span class="name">X</span><span class="punctuation">,</span> <span class="name">S</span><span class="punctuation">,</span> <span class="name">color</span><span class="operator">=</span><span class="literal string">&quot;green&quot;</span><span class="punctuation">,</span> <span class="name">linewidth</span><span class="operator">=</span><span class="literal number float">1.0</span><span class="punctuation">,</span> <span class="name">linestyle</span><span class="operator">=</span><span class="literal string">&quot;-&quot;</span><span class="punctuation">)</span>
 
-# Set x limits
-xlim(-4.0,4.0)
+<span class="comment"># Set x limits</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">xlim</span><span class="punctuation">(</span><span class="operator">-</span><span class="literal number float">4.0</span><span class="punctuation">,</span><span class="literal number float">4.0</span><span class="punctuation">)</span>
 
-# Set x ticks
-xticks(np.linspace(-4,4,9,endpoint=True))
+<span class="comment"># Set x ticks</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">xticks</span><span class="punctuation">(</span><span class="name">np</span><span class="operator">.</span><span class="name">linspace</span><span class="punctuation">(</span><span class="operator">-</span><span class="literal number integer">4</span><span class="punctuation">,</span><span class="literal number integer">4</span><span class="punctuation">,</span><span class="literal number integer">9</span><span class="punctuation">,</span><span class="name">endpoint</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">))</span>
 
-# Set y limits
-ylim(-1.0,1.0)
+<span class="comment"># Set y limits</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">ylim</span><span class="punctuation">(</span><span class="operator">-</span><span class="literal number float">1.0</span><span class="punctuation">,</span><span class="literal number float">1.0</span><span class="punctuation">)</span>
 
-# Set y ticks
-yticks(np.linspace(-1,1,5,endpoint=True))
+<span class="comment"># Set y ticks</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">yticks</span><span class="punctuation">(</span><span class="name">np</span><span class="operator">.</span><span class="name">linspace</span><span class="punctuation">(</span><span class="operator">-</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">5</span><span class="punctuation">,</span><span class="name">endpoint</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">))</span>
 
-# Save figure using 72 dots per inch
-# savefig(&quot;exercice_2.png&quot;,dpi=72)
+<span class="comment"># Save figure using 72 dots per inch</span>
+<span class="comment"># savefig(&quot;../figures/exercice_2.png&quot;,dpi=72)</span>
 
-# Show result on screen
-show()
+<span class="comment"># Show result on screen</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">show</span><span class="punctuation">()</span>
 </pre>
 </div>
 <div class="section" id="changing-colors-and-line-widths">
-<h2><a class="toc-backref" href="#id12">Changing colors and line widths</a></h2>
+<h2>Changing colors and line widths</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -227,14 +164,14 @@ slighty thicker line for both of them. We'll also slightly alter the figure
 size to make it more horizontal.</p>
 <pre class="literal-block">
 ...
-figure(figsize=(10,6), dpi=80)
-plot(X, C, color=&quot;blue&quot;, linewidth=2.5, linestyle=&quot;-&quot;)
-plot(X, S, color=&quot;red&quot;,  linewidth=2.5, linestyle=&quot;-&quot;)
+plt.figure(figsize=(10,6), dpi=80)
+plt.plot(X, C, color=&quot;blue&quot;, linewidth=2.5, linestyle=&quot;-&quot;)
+plt.plot(X, S, color=&quot;red&quot;,  linewidth=2.5, linestyle=&quot;-&quot;)
 ...
 </pre>
 </div>
 <div class="section" id="setting-limits">
-<h2><a class="toc-backref" href="#id13">Setting limits</a></h2>
+<h2>Setting limits</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -247,13 +184,13 @@ plot(X, S, color=&quot;red&quot;,  linewidth=2.5, linestyle=&quot;-&quot;)
 in order to clearly see all data points.</p>
 <pre class="literal-block">
 ...
-xlim(X.min()*1.1, X.max()*1.1)
-ylim(C.min()*1.1, C.max()*1.1)
+plt.xlim(X.min()*1.1, X.max()*1.1)
+plt.ylim(C.min()*1.1, C.max()*1.1)
 ...
 </pre>
 </div>
 <div class="section" id="setting-ticks">
-<h2><a class="toc-backref" href="#id14">Setting ticks</a></h2>
+<h2>Setting ticks</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -269,13 +206,13 @@ ylim(C.min()*1.1, C.max()*1.1)
 these values.</p>
 <pre class="literal-block">
 ...
-xticks( [-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
-yticks([-1, 0, +1])
+plt.xticks( [-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
+plt.yticks([-1, 0, +1])
 ...
 </pre>
 </div>
 <div class="section" id="setting-tick-labels">
-<h2><a class="toc-backref" href="#id15">Setting tick labels</a></h2>
+<h2>Setting tick labels</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -293,16 +230,16 @@ tick values, we can also provide a corresponding label in the second argument
 list. Note that we'll use latex to allow for nice rendering of the label.</p>
 <pre class="literal-block">
 ...
-xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
+plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
        [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
 
-yticks([-1, 0, +1],
+plt.yticks([-1, 0, +1],
        [r'$-1$', r'$0$', r'$+1$'])
 ...
 </pre>
 </div>
 <div class="section" id="moving-spines">
-<h2><a class="toc-backref" href="#id16">Moving spines</a></h2>
+<h2>Moving spines</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -320,7 +257,7 @@ the top and right by setting their color to none and we'll move the bottom and
 left ones to coordinate 0 in data space coordinates.</p>
 <pre class="literal-block">
 ...
-ax = gca()
+ax = plt.gca()
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
 ax.xaxis.set_ticks_position('bottom')
@@ -331,7 +268,7 @@ ax.spines['left'].set_position(('data',0))
 </pre>
 </div>
 <div class="section" id="adding-a-legend">
-<h2><a class="toc-backref" href="#id17">Adding a legend</a></h2>
+<h2>Adding a legend</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -346,15 +283,15 @@ keyword argument label (that will be used in the legend box) to the plot
 commands.</p>
 <pre class="literal-block">
 ...
-plot(X, C, color=&quot;blue&quot;, linewidth=2.5, linestyle=&quot;-&quot;, label=&quot;cosine&quot;)
-plot(X, S, color=&quot;red&quot;,  linewidth=2.5, linestyle=&quot;-&quot;, label=&quot;sine&quot;)
+plt.plot(X, C, color=&quot;blue&quot;, linewidth=2.5, linestyle=&quot;-&quot;, label=&quot;cosine&quot;)
+plt.plot(X, S, color=&quot;red&quot;,  linewidth=2.5, linestyle=&quot;-&quot;, label=&quot;sine&quot;)
 
-legend(loc='upper left')
+plt.legend(loc='upper left', frameon=False)
 ...
 </pre>
 </div>
 <div class="section" id="annotate-some-points">
-<h2><a class="toc-backref" href="#id18">Annotate some points</a></h2>
+<h2>Annotate some points</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -371,26 +308,26 @@ the annotate command to display some text with an arrow.</p>
 ...
 
 t = 2*np.pi/3
-plot([t,t],[0,np.cos(t)], color ='blue', linewidth=2.5, linestyle=&quot;--&quot;)
-scatter([t,],[np.cos(t),], 50, color ='blue')
+plt.plot([t,t],[0,np.cos(t)], color ='blue', linewidth=2.5, linestyle=&quot;--&quot;)
+plt.scatter([t,],[np.cos(t),], 50, color ='blue')
 
-annotate(r'$\sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
-         xy=(t, np.sin(t)), xycoords='data',
-         xytext=(+10, +30), textcoords='offset points', fontsize=16,
-         arrowprops=dict(arrowstyle=&quot;-&gt;&quot;, connectionstyle=&quot;arc3,rad=.2&quot;))
+plt.annotate(r'$\sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
+             xy=(t, np.sin(t)), xycoords='data',
+             xytext=(+10, +30), textcoords='offset points', fontsize=16,
+             arrowprops=dict(arrowstyle=&quot;-&gt;&quot;, connectionstyle=&quot;arc3,rad=.2&quot;))
 
-plot([t,t],[0,np.sin(t)], color ='red', linewidth=2.5, linestyle=&quot;--&quot;)
-scatter([t,],[np.sin(t),], 50, color ='red')
+plt.plot([t,t],[0,np.sin(t)], color ='red', linewidth=2.5, linestyle=&quot;--&quot;)
+plt.scatter([t,],[np.sin(t),], 50, color ='red')
 
-annotate(r'$\cos(\frac{2\pi}{3})=-\frac{1}{2}$',
-         xy=(t, np.cos(t)), xycoords='data',
-         xytext=(-90, -50), textcoords='offset points', fontsize=16,
-         arrowprops=dict(arrowstyle=&quot;-&gt;&quot;, connectionstyle=&quot;arc3,rad=.2&quot;))
+plt.annotate(r'$\cos(\frac{2\pi}{3})=-\frac{1}{2}$',
+             xy=(t, np.cos(t)), xycoords='data',
+             xytext=(-90, -50), textcoords='offset points', fontsize=16,
+             arrowprops=dict(arrowstyle=&quot;-&gt;&quot;, connectionstyle=&quot;arc3,rad=.2&quot;))
 ...
 </pre>
 </div>
 <div class="section" id="devil-is-in-the-details">
-<h2><a class="toc-backref" href="#id19">Devil is in the details</a></h2>
+<h2>Devil is in the details</h2>
 <div class="admonition-documentation admonition">
 <p class="first admonition-title">Documentation</p>
 <ul class="last simple">
@@ -413,7 +350,7 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
 </div>
 </div>
 <div class="section" id="figures-subplots-axes-and-ticks">
-<h1><a class="toc-backref" href="#id20">Figures, Subplots, Axes and Ticks</a></h1>
+<h1><a class="toc-backref" href="#id6">Figures, Subplots, Axes and Ticks</a></h1>
 <p>So far we have used implicit figure and axes creation. This is handy for fast
 plots. We can have more control over the display using figure, subplot, and
 axes explicitly. A figure in matplotlib means the whole window in the user
@@ -424,8 +361,8 @@ and subplots without explicitly calling them. When we call plot, matplotlib
 calls gca() to get the current axes and gca in turn calls gcf() to get the
 current figure. If there is none it calls figure() to make one, strictly
 speaking, to make a subplot(111). Let's look at the details.</p>
-<div class="section" id="id4">
-<h2><a class="toc-backref" href="#id21">Figures</a></h2>
+<div class="section" id="figures">
+<h2>Figures</h2>
 <p>A figure is the windows in the GUI that has &quot;Figure #&quot; as title. Figures
 are numbered starting from 1 as opposed to the normal Python way starting
 from 0. This is clearly MATLAB-style.  There are several parameters that
@@ -480,7 +417,7 @@ argument), or (3) all figures (all as argument).</p>
 set_something methods.</p>
 </div>
 <div class="section" id="subplots">
-<h2><a class="toc-backref" href="#id22">Subplots</a></h2>
+<h2>Subplots</h2>
 <p>With subplot you can arrange plots in a regular grid. You need to specify the
 number of rows and columns and the number of the plot. Note that the <a class="reference external" href="http://matplotlib.sourceforge.net/users/gridspec.html">gridspec</a> command is a more
 powerful alternative.</p>
@@ -490,7 +427,7 @@ powerful alternative.</p>
 <a class="reference external image-reference" href="scripts/gridspec.py"><img alt="figures/gridspec.png" src="figures/gridspec.png" /></a>
 </div>
 <div class="section" id="axes">
-<h2><a class="toc-backref" href="#id23">Axes</a></h2>
+<h2>Axes</h2>
 <p>Axes are very similar to subplots but allow placement of plots at any location
 in the figure. So if we want to put a smaller plot inside a bigger one we do
 so with axes.</p>
@@ -498,7 +435,7 @@ so with axes.</p>
 <a class="reference external image-reference" href="scripts/axes-2.py"><img alt="figures/axes-2.png" src="figures/axes-2.png" /></a>
 </div>
 <div class="section" id="ticks">
-<h2><a class="toc-backref" href="#id24">Ticks</a></h2>
+<h2>Ticks</h2>
 <p>Well formatted ticks are an important part of publishing-ready
 figures. Matplotlib provides a totally configurable system for ticks. There are
 tick locators to specify where ticks should appear and tick formatters to give
@@ -564,8 +501,115 @@ matplotlib.dates.</p>
 </div>
 </div>
 </div>
+<div class="section" id="animation">
+<h1><a class="toc-backref" href="#id7">Animation</a></h1>
+<p>For quite a long time, animation in matplotlib was not an easy taks and was
+done mainly through clever hacks. However, things have started to change since
+version 1.1 and the introduction of tools for creating animation very
+intuitively, with the possiblity to save them in all kind of formats (but don't
+expect to be able to run very complex animation at 60 fps though).</p>
+<div class="admonition-documentation admonition">
+<p class="first admonition-title">Documentation</p>
+<ul class="last simple">
+<li>See <a class="reference external" href="http://matplotlib.org/api/animation_api.html">Animation</a></li>
+</ul>
+</div>
+<p>The most easy way to make an animation in matplotlib is to declare a
+FuncAnimation object that specifies to matplotlib what is the figure to
+update, what is the update function and what is the delay between frames.</p>
+<div class="section" id="drip-drop">
+<h2>Drip drop</h2>
+<p>Let's start with a simple animation: <strong>rain</strong></p>
+<p>A very simple rain effect can be obtained by having small rings randomly
+positioned over a figure and making them to grow with time. Of course, they
+won't grow forever since the wave is supposed to dampe with time. To simulate
+that, we can use a more and more transparent color when the ring is growing, up
+to the point where it is no more visible. At this point, we remove the ring and
+create a new one.</p>
+<p>First step is to create a blank figure:</p>
+<pre class="code python literal-block">
+<span class="comment"># New figure with white background</span>
+<span class="name">fig</span> <span class="operator">=</span> <span class="name">plt</span><span class="operator">.</span><span class="name">figure</span><span class="punctuation">(</span><span class="name">figsize</span><span class="operator">=</span><span class="punctuation">(</span><span class="literal number integer">6</span><span class="punctuation">,</span><span class="literal number integer">6</span><span class="punctuation">),</span> <span class="name">facecolor</span><span class="operator">=</span><span class="literal string">'white'</span><span class="punctuation">)</span>
+
+<span class="comment"># New axis over the whole figure, no frame and a 1:1 aspect ratio</span>
+<span class="name">ax</span> <span class="operator">=</span> <span class="name">fig</span><span class="operator">.</span><span class="name">add_axes</span><span class="punctuation">([</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">],</span> <span class="name">frameon</span><span class="operator">=</span><span class="name builtin pseudo">False</span><span class="punctuation">,</span> <span class="name">aspect</span><span class="operator">=</span><span class="literal number integer">1</span><span class="punctuation">)</span>
+</pre>
+<p>Next, we need to create several rings. For this, we can use the scatter plot
+object that is generally used to visualize points cloud but we can also use it
+to draw rings by specifying we don't have a facecolor. We have also to take
+care of initial size and color for each ring such that we have all size between
+minium and maximum size and that the largest ring is almost transparent.</p>
+<a class="reference external image-reference" href="scripts/rain-static.py"><img alt="figures/rain-static.png" class="align-right" src="figures/rain-static.png" /></a>
+<pre class="code python literal-block">
+<span class="comment"># Number of ring</span>
+<span class="name">n</span> <span class="operator">=</span> <span class="literal number integer">50</span>
+<span class="name">size_min</span> <span class="operator">=</span> <span class="literal number integer">50</span>
+<span class="name">size_max</span> <span class="operator">=</span> <span class="literal number integer">50</span><span class="operator">*</span><span class="literal number integer">50</span>
+
+<span class="comment"># Ring position</span>
+<span class="name">P</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">random</span><span class="operator">.</span><span class="name">uniform</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,(</span><span class="name">n</span><span class="punctuation">,</span><span class="literal number integer">2</span><span class="punctuation">))</span>
+
+<span class="comment"># Ring colors</span>
+<span class="name">C</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">ones</span><span class="punctuation">((</span><span class="name">n</span><span class="punctuation">,</span><span class="literal number integer">4</span><span class="punctuation">))</span> <span class="operator">*</span> <span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">)</span>
+<span class="comment"># Alpha color channel goes from 0 (transparent) to 1 (opaque)</span>
+<span class="name">C</span><span class="punctuation">[:,</span><span class="literal number integer">3</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">linspace</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="name">n</span><span class="punctuation">)</span>
+
+<span class="comment"># Ring sizes</span>
+<span class="name">S</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">linspace</span><span class="punctuation">(</span><span class="name">size_min</span><span class="punctuation">,</span> <span class="name">size_max</span><span class="punctuation">,</span> <span class="name">n</span><span class="punctuation">)</span>
+
+<span class="comment"># Scatter plot</span>
+<span class="name">scat</span> <span class="operator">=</span> <span class="name">ax</span><span class="operator">.</span><span class="name">scatter</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">[:,</span><span class="literal number integer">0</span><span class="punctuation">],</span> <span class="name">P</span><span class="punctuation">[:,</span><span class="literal number integer">1</span><span class="punctuation">],</span> <span class="name">s</span><span class="operator">=</span><span class="name">S</span><span class="punctuation">,</span> <span class="name">lw</span> <span class="operator">=</span> <span class="literal number float">0.5</span><span class="punctuation">,</span>
+                  <span class="name">edgecolors</span> <span class="operator">=</span> <span class="name">C</span><span class="punctuation">,</span> <span class="name">facecolors</span><span class="operator">=</span><span class="literal string">'None'</span><span class="punctuation">)</span>
+
+<span class="comment"># Ensure limits are [0,1] and remove ticks</span>
+<span class="name">ax</span><span class="operator">.</span><span class="name">set_xlim</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">),</span> <span class="name">ax</span><span class="operator">.</span><span class="name">set_xticks</span><span class="punctuation">([])</span>
+<span class="name">ax</span><span class="operator">.</span><span class="name">set_ylim</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">),</span> <span class="name">ax</span><span class="operator">.</span><span class="name">set_yticks</span><span class="punctuation">([])</span>
+</pre>
+<p>Now, we need to write the update function for our animation. We know that at
+each time step each ring should grow be more transparent while largest ring
+should be totally transparent and thus removed. Of course, we won't actually
+remove the largest ring but re-use it to set a new ring at a new random
+position, with nominal size and color. Hence, we keep the number of ring
+constant.</p>
+<a class="reference external image-reference" href="scripts/rain-dynamic.py"><img alt="figures/rain.gif" class="align-right" src="figures/rain.gif" /></a>
+<pre class="code python literal-block">
+<span class="keyword">def</span> <span class="name function">update</span><span class="punctuation">(</span><span class="name">frame</span><span class="punctuation">):</span>
+    <span class="keyword">global</span> <span class="name">P</span><span class="punctuation">,</span> <span class="name">C</span><span class="punctuation">,</span> <span class="name">S</span>
+
+    <span class="comment"># Every ring is made more transparent</span>
+    <span class="name">C</span><span class="punctuation">[:,</span><span class="literal number integer">3</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">maximum</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span> <span class="name">C</span><span class="punctuation">[:,</span><span class="literal number integer">3</span><span class="punctuation">]</span> <span class="operator">-</span> <span class="literal number float">1.0</span><span class="operator">/</span><span class="name">n</span><span class="punctuation">)</span>
+
+    <span class="comment"># Each ring is made larger</span>
+    <span class="name">S</span> <span class="operator">+=</span> <span class="punctuation">(</span><span class="name">size_max</span> <span class="operator">-</span> <span class="name">size_min</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="name">n</span>
+
+    <span class="comment"># Reset ring specific ring (relative to frame number)</span>
+    <span class="name">i</span> <span class="operator">=</span> <span class="name">frame</span> <span class="operator">%</span> <span class="literal number integer">50</span>
+    <span class="name">P</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">random</span><span class="operator">.</span><span class="name">uniform</span><span class="punctuation">(</span><span class="literal number integer">0</span><span class="punctuation">,</span><span class="literal number integer">1</span><span class="punctuation">,</span><span class="literal number integer">2</span><span class="punctuation">)</span>
+    <span class="name">S</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name">size_min</span>
+    <span class="name">C</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">,</span><span class="literal number integer">3</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="literal number integer">1</span>
+
+    <span class="comment"># Update scatter object</span>
+    <span class="name">scat</span><span class="operator">.</span><span class="name">set_edgecolors</span><span class="punctuation">(</span><span class="name">C</span><span class="punctuation">)</span>
+    <span class="name">scat</span><span class="operator">.</span><span class="name">set_sizes</span><span class="punctuation">(</span><span class="name">S</span><span class="punctuation">)</span>
+    <span class="name">scat</span><span class="operator">.</span><span class="name">set_offsets</span><span class="punctuation">(</span><span class="name">P</span><span class="punctuation">)</span>
+
+    <span class="comment"># Return the modified object</span>
+    <span class="keyword">return</span> <span class="name">scat</span><span class="punctuation">,</span>
+</pre>
+<p>Last step is to tell matplotlib to use this function as an update function for
+the animation and display the result or save it as a movie:</p>
+<pre class="code python literal-block">
+<span class="name">animation</span> <span class="operator">=</span> <span class="name">FuncAnimation</span><span class="punctuation">(</span><span class="name">fig</span><span class="punctuation">,</span> <span class="name">update</span><span class="punctuation">,</span> <span class="name">interval</span><span class="operator">=</span><span class="literal number integer">10</span><span class="punctuation">,</span> <span class="name">blit</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">,</span> <span class="name">frames</span><span class="operator">=</span><span class="literal number integer">200</span><span class="punctuation">)</span>
+<span class="comment"># animation.save('rain.gif', writer='imagemagick', fps=30, dpi=40)</span>
+<span class="name">plt</span><span class="operator">.</span><span class="name">show</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="earthquakes">
+<h2>Earthquakes</h2>
+</div>
+</div>
 <div class="section" id="other-types-of-plots">
-<h1><a class="toc-backref" href="#id25">Other Types of Plots</a></h1>
+<h1><a class="toc-backref" href="#id8">Other Types of Plots</a></h1>
 <a class="reference internal image-reference" href="#regular-plots"><img alt="figures/plot.png" src="figures/plot.png" /></a>
 <a class="reference internal image-reference" href="#scatter-plots"><img alt="figures/scatter.png" src="figures/scatter.png" /></a>
 <a class="reference internal image-reference" href="#bar-plots"><img alt="figures/bar.png" src="figures/bar.png" /></a>
@@ -579,7 +623,7 @@ matplotlib.dates.</p>
 <a class="reference internal image-reference" href="#d-plots"><img alt="figures/plot3d.png" src="figures/plot3d.png" /></a>
 <a class="reference internal image-reference" href="#text"><img alt="figures/text.png" src="figures/text.png" /></a>
 <div class="section" id="regular-plots">
-<h2><a class="toc-backref" href="#id26">Regular Plots</a></h2>
+<h2>Regular Plots</h2>
 <a class="reference external image-reference" href="scripts/plot_ex.py"><img alt="figures/plot_ex.png" class="align-right" src="figures/plot_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -602,7 +646,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="scatter-plots">
-<h2><a class="toc-backref" href="#id27">Scatter Plots</a></h2>
+<h2>Scatter Plots</h2>
 <a class="reference external image-reference" href="scripts/scatter_ex.py"><img alt="figures/scatter_ex.png" class="align-right" src="figures/scatter_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -623,7 +667,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="bar-plots">
-<h2><a class="toc-backref" href="#id28">Bar Plots</a></h2>
+<h2>Bar Plots</h2>
 <a class="reference external image-reference" href="scripts/bar_ex.py"><img alt="figures/bar_ex.png" class="align-right" src="figures/bar_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -651,7 +695,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="contour-plots">
-<h2><a class="toc-backref" href="#id29">Contour Plots</a></h2>
+<h2>Contour Plots</h2>
 <a class="reference external image-reference" href="scripts/contour_ex.py"><img alt="figures/contour_ex.png" class="align-right" src="figures/contour_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -677,7 +721,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="imshow">
-<h2><a class="toc-backref" href="#id30">Imshow</a></h2>
+<h2>Imshow</h2>
 <a class="reference external image-reference" href="scripts/imshow_ex.py"><img alt="figures/imshow_ex.png" class="align-right" src="figures/imshow_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -700,7 +744,7 @@ imshow(f(X,Y)), show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="pie-charts">
-<h2><a class="toc-backref" href="#id31">Pie Charts</a></h2>
+<h2>Pie Charts</h2>
 <a class="reference external image-reference" href="scripts/pie_ex.py"><img alt="figures/pie_ex.png" class="align-right" src="figures/pie_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -718,7 +762,7 @@ pie(Z), show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="quiver-plots">
-<h2><a class="toc-backref" href="#id32">Quiver Plots</a></h2>
+<h2>Quiver Plots</h2>
 <a class="reference external image-reference" href="scripts/quiver_ex.py"><img alt="figures/quiver_ex.png" class="align-right" src="figures/quiver_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -736,7 +780,7 @@ quiver(X,Y), show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="grids">
-<h2><a class="toc-backref" href="#id33">Grids</a></h2>
+<h2>Grids</h2>
 <a class="reference external image-reference" href="scripts/grid_ex.py"><img alt="figures/grid_ex.png" class="align-right" src="figures/grid_ex.png" /></a>
 <p>Starting from the code below, try to reproduce the graphic on the right taking
 care of line styles.</p>
@@ -754,7 +798,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="multi-plots">
-<h2><a class="toc-backref" href="#id34">Multi Plots</a></h2>
+<h2>Multi Plots</h2>
 <a class="reference external image-reference" href="scripts/multiplot_ex.py"><img alt="figures/multiplot_ex.png" class="align-right" src="figures/multiplot_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -773,7 +817,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="polar-axis">
-<h2><a class="toc-backref" href="#id35">Polar Axis</a></h2>
+<h2>Polar Axis</h2>
 <a class="reference external image-reference" href="scripts/polar_ex.py"><img alt="figures/polar_ex.png" class="align-right" src="figures/polar_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -800,7 +844,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="d-plots">
-<h2><a class="toc-backref" href="#id36">3D Plots</a></h2>
+<h2>3D Plots</h2>
 <a class="reference external image-reference" href="scripts/plot3d_ex.py"><img alt="figures/plot3d_ex.png" class="align-right" src="figures/plot3d_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -826,7 +870,7 @@ show()
 <p>Click on figure for solution.</p>
 </div>
 <div class="section" id="text">
-<h2><a class="toc-backref" href="#id37">Text</a></h2>
+<h2>Text</h2>
 <a class="reference external image-reference" href="scripts/text_ex.py"><img alt="figures/text_ex.png" class="align-right" src="figures/text_ex.png" /></a>
 <div class="admonition-hints admonition">
 <p class="first admonition-title">Hints</p>
@@ -837,11 +881,11 @@ show()
 </div>
 </div>
 <div class="section" id="beyond-this-tutorial">
-<h1><a class="toc-backref" href="#id38">Beyond this tutorial</a></h1>
+<h1><a class="toc-backref" href="#id9">Beyond this tutorial</a></h1>
 <p>Matplotlib benefits from extensive documentation as well as a large
 community of users and developpers. Here are some links of interest:</p>
 <div class="section" id="tutorials">
-<h2><a class="toc-backref" href="#id39">Tutorials</a></h2>
+<h2>Tutorials</h2>
 <ul class="simple">
 <li><a class="reference external" href="http://matplotlib.sourceforge.net/users/pyplot_tutorial.html">Pyplot tutorial</a><ul>
 <li>Introduction</li>
@@ -899,7 +943,7 @@ community of users and developpers. Here are some links of interest:</p>
 </ul>
 </div>
 <div class="section" id="matplotlib-documentation">
-<h2><a class="toc-backref" href="#id40">Matplotlib documentation</a></h2>
+<h2>Matplotlib documentation</h2>
 <ul class="simple">
 <li><a class="reference external" href="http://matplotlib.sourceforge.net/users/index.html">User guide</a></li>
 <li><a class="reference external" href="http://matplotlib.sourceforge.net/faq/index.html">FAQ</a><ul>
@@ -915,7 +959,7 @@ community of users and developpers. Here are some links of interest:</p>
 </ul>
 </div>
 <div class="section" id="code-documentation">
-<h2><a class="toc-backref" href="#id41">Code documentation</a></h2>
+<h2>Code documentation</h2>
 <p>The code is fairly well documented and you can quickly access a specific
 command from within a python session:</p>
 <pre class="literal-block">
@@ -941,24 +985,24 @@ plot(*args, **kwargs)
 </pre>
 </div>
 <div class="section" id="galleries">
-<h2><a class="toc-backref" href="#id42">Galleries</a></h2>
+<h2>Galleries</h2>
 <p>The <a class="reference external" href="http://matplotlib.sourceforge.net/gallery.html">matplotlib gallery</a> is
 also incredibly useful when you search how to render a given graphic. Each
 example comes with its source.</p>
 <p>A smaller gallery is also available <a class="reference external" href="http://www.loria.fr/~rougier/coding/gallery/">here</a>.</p>
 </div>
 <div class="section" id="mailing-lists">
-<h2><a class="toc-backref" href="#id43">Mailing lists</a></h2>
+<h2>Mailing lists</h2>
 <p>Finally, there is a <a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/matplotlib-users">user mailing list</a> where you can
 ask for help and a <a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/matplotlib-devel">developers mailing list</a> that is more
 technical.</p>
 </div>
 </div>
 <div class="section" id="quick-references">
-<h1><a class="toc-backref" href="#id44">Quick references</a></h1>
+<h1><a class="toc-backref" href="#id10">Quick references</a></h1>
 <p>Here is a set of tables that show main properties and styles.</p>
 <div class="section" id="line-properties">
-<h2><a class="toc-backref" href="#id45">Line properties</a></h2>
+<h2>Line properties</h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="20%" />
@@ -1045,7 +1089,7 @@ technical.</p>
 </table>
 </div>
 <div class="section" id="line-styles">
-<h2><a class="toc-backref" href="#id46">Line styles</a></h2>
+<h2>Line styles</h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="16%" />
@@ -1188,7 +1232,7 @@ technical.</p>
 </table>
 </div>
 <div class="section" id="markers">
-<h2><a class="toc-backref" href="#id47">Markers</a></h2>
+<h2>Markers</h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="16%" />
@@ -1366,7 +1410,7 @@ technical.</p>
 </table>
 </div>
 <div class="section" id="colormaps">
-<h2><a class="toc-backref" href="#id48">Colormaps</a></h2>
+<h2>Colormaps</h2>
 <p>All colormaps can be reversed by appending <tt class="docutils literal">_r</tt>. For instance, <tt class="docutils literal">gray_r</tt> is
 the reverse of <tt class="docutils literal">gray</tt>.</p>
 <p>If you want to know more about colormaps, checks <a class="reference external" href="https://gist.github.com/2719900">Documenting the matplotlib
