@@ -139,7 +139,7 @@ Changing colors and line widths
    :target: scripts/exercice_3.py
 
 First step, we want to have the cosine in blue and the sine in red and a
-slighty thicker line for both of them. We'll also slightly alter the figure
+slightly thicker line for both of them. We'll also slightly alter the figure
 size to make it more horizontal.
 
 
@@ -416,8 +416,7 @@ close. Depending on the argument it closes (1) the current figure (no
 argument), (2) a specific figure (figure number or figure instance as
 argument), or (3) all figures (all as argument).
 
-As with other objects, you can set figure properties also setp or with the
-set_something methods.
+As with other objects, you can set figure properties with the set_something methods.
 
 
 Subplots
@@ -521,10 +520,10 @@ matplotlib.dates.
 Animation
 =========
 
-For quite a long time, animation in matplotlib was not an easy taks and was
+For quite a long time, animation in matplotlib was not an easy task and was
 done mainly through clever hacks. However, things have started to change since
 version 1.1 and the introduction of tools for creating animation very
-intuitively, with the possiblity to save them in all kind of formats (but don't
+intuitively, with the possibility to save them in all kind of formats (but don't
 expect to be able to run very complex animation at 60 fps though).
 
 .. admonition:: Documentation
@@ -653,7 +652,7 @@ We'll now use the rain animation to visualize earthquakes on the planet from
 the last 30 days. The USGS Earthquake Hazards Program is part of the National
 Earthquake Hazards Reduction Program (NEHRP) and provides several data on their
 `website <http://earthquake.usgs.gov>`_. Those data are sorted according to
-eartquakes magnitude, ranging from significant only down to all earthquakes,
+earthquakes magnitude, ranging from significant only down to all earthquakes,
 major or minor. You would be surprised by the number of minor earthquakes
 happening every hour on the planet. Since this would represent too much data
 for us, we'll stick to earthquakes with magnitude > 4.5. At the time of writing,
@@ -708,7 +707,7 @@ center is and to translate latitude/longitude in some coordinates matplotlib
 can handle. Fortunately, there is the `basemap
 <http://matplotlib.org/basemap/>`_ project (that tends to be replaced by the
 more complete `cartopy <http://scitools.org.uk/cartopy/>`_) that is really
-simmple to install and to use. First step is to define a projection to draw the
+simple to install and to use. First step is to define a projection to draw the
 earth onto a screen (there exists many different projections) and we'll stick
 to the `mill` projection which is rather standard for non-specialist like me.
        
@@ -769,7 +768,7 @@ put some eye candy:
    plt.show()
 
 
-If eveything went well, you should obtain something like this (with animation):
+If everything went well, you should obtain something like this (with animation):
 
 .. image:: figures/earthquakes.png
    :target: scripts/earthquakes.py
@@ -832,15 +831,16 @@ Regular Plots
 Starting from the code below, try to reproduce the graphic on the right taking
 care of filled areas::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    n = 256
    X = np.linspace(-np.pi,np.pi,n,endpoint=True)
    Y = np.sin(2*X)
 
-   plot (X, Y+1, color='blue', alpha=1.00)
-   plot (X, Y-1, color='blue', alpha=1.00)
-   show()
+   plt.plot (X, Y+1, color='blue', alpha=1.00)
+   plt.plot (X, Y-1, color='blue', alpha=1.00)
+   plt.show()
 
 Click on figure for solution.
 
@@ -863,14 +863,15 @@ care of marker size, color and transparency.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    n = 1024
    X = np.random.normal(0,1,n)
    Y = np.random.normal(0,1,n)
 
-   scatter(X,Y)
-   show()
+   plt.scatter(X,Y)
+   plt.show()
 
 Click on figure for solution.
 
@@ -894,21 +895,22 @@ adding labels for red bars.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    n = 12
    X = np.arange(n)
    Y1 = (1-X/float(n)) * np.random.uniform(0.5,1.0,n)
    Y2 = (1-X/float(n)) * np.random.uniform(0.5,1.0,n)
 
-   bar(X, +Y1, facecolor='#9999ff', edgecolor='white')
-   bar(X, -Y2, facecolor='#ff9999', edgecolor='white')
+   plt.bar(X, +Y1, facecolor='#9999ff', edgecolor='white')
+   plt.bar(X, -Y2, facecolor='#ff9999', edgecolor='white')
 
    for x,y in zip(X,Y1):
-       text(x+0.4, y+0.05, '%.2f' % y, ha='center', va= 'bottom')
+       plt.text(x+0.4, y+0.05, '%.2f' % y, ha='center', va= 'bottom')
 
-   ylim(-1.25,+1.25)
-   show()
+   plt.ylim(-1.25,+1.25)
+   plt.show()
 
 Click on figure for solution.
 
@@ -931,7 +933,8 @@ care of the colormap (see `Colormaps`_ below).
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
 
@@ -940,9 +943,9 @@ care of the colormap (see `Colormaps`_ below).
    y = np.linspace(-3,3,n)
    X,Y = np.meshgrid(x,y)
 
-   contourf(X, Y, f(X,Y), 8, alpha=.75, cmap='jet')
-   C = contour(X, Y, f(X,Y), 8, colors='black', linewidth=.5)
-   show()
+   plt.contourf(X, Y, f(X,Y), 8, alpha=.75, cmap='jet')
+   C = plt.contour(X, Y, f(X,Y), 8, colors='black', linewidth=.5)
+   plt.show()
 
 Click on figure for solution.
 
@@ -967,7 +970,8 @@ care of colormap, image interpolation and origin.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
 
@@ -975,7 +979,8 @@ care of colormap, image interpolation and origin.
    x = np.linspace(-3,3,4*n)
    y = np.linspace(-3,3,3*n)
    X,Y = np.meshgrid(x,y)
-   imshow(f(X,Y)), show()
+   plt.imshow(f(X,Y))
+   plt.show()
 
 Click on figure for solution.
 
@@ -996,11 +1001,13 @@ care of colors and slices size.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    n = 20
    Z = np.random.uniform(0,1,n)
-   pie(Z), show()
+   plt.pie(Z)
+   plt.show()
 
 Click on figure for solution.
 
@@ -1022,11 +1029,13 @@ care of colors and orientations.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    n = 8
    X,Y = np.mgrid[0:n,0:n]
-   quiver(X,Y), show()
+   plt.quiver(X,Y)
+   plt.show()
 
 Click on figure for solution.
 
@@ -1045,7 +1054,8 @@ care of line styles.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
    axes = gca()
    axes.set_xlim(0,4)
@@ -1053,7 +1063,7 @@ care of line styles.
    axes.set_xticklabels([])
    axes.set_yticklabels([])
 
-   show()
+   plt.show()
 
 Click on figure for solution.
 
@@ -1074,13 +1084,14 @@ Starting from the code below, try to reproduce the graphic on the right.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
-   subplot(2,2,1)
-   subplot(2,2,3)
-   subplot(2,2,4)
+   plt.subplot(2,2,1)
+   plt.subplot(2,2,3)
+   plt.subplot(2,2,4)
 
-   show()
+   plt.show()
 
 Click on figure for solution.
 
@@ -1101,21 +1112,22 @@ Starting from the code below, try to reproduce the graphic on the right.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
 
-   axes([0,0,1,1])
+   plt.axes([0,0,1,1])
 
    N = 20
    theta = np.arange(0.0, 2*np.pi, 2*np.pi/N)
    radii = 10*np.random.rand(N)
    width = np.pi/4*np.random.rand(N)
-   bars = bar(theta, radii, width=width, bottom=0.0)
+   bars = plt.bar(theta, radii, width=width, bottom=0.0)
 
    for r,bar in zip(radii, bars):
        bar.set_facecolor( cm.jet(r/10.))
        bar.set_alpha(0.5)
 
-   show()
+   plt.show()
 
 Click on figure for solution.
 
@@ -1137,10 +1149,11 @@ Starting from the code below, try to reproduce the graphic on the right.
 
 ::
 
-   from pylab import *
+   import numpy as np
+   import maplotlib.pyplot as plt
    from mpl_toolkits.mplot3d import Axes3D
 
-   fig = figure()
+   fig = plt.figure()
    ax = Axes3D(fig)
    X = np.arange(-4, 4, 0.25)
    Y = np.arange(-4, 4, 0.25)
@@ -1150,7 +1163,7 @@ Starting from the code below, try to reproduce the graphic on the right.
 
    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='hot')
 
-   show()
+   plt.show()
 
 Click on figure for solution.
 

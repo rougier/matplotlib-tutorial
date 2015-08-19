@@ -1,19 +1,24 @@
-from pylab import *
+# -----------------------------------------------------------------------------
+# Copyright (c) 2015, Nicolas P. Rougier. All Rights Reserved.
+# Distributed under the (new) BSD License. See LICENSE.txt for more info.
+# -----------------------------------------------------------------------------
+import numpy as np
+import matplotlib.pyplot as plt
 
-fig =figure()
+fig = plt.figure()
 fig.subplots_adjust(bottom=0.025, left=0.025, top = 0.975, right=0.975)
 
-subplot(2,1,1)
-xticks([]), yticks([])
+plt.subplot(2,1,1)
+plt.xticks([]), plt.yticks([])
 
-subplot(2,3,4)
-xticks([]), yticks([])
+plt.subplot(2,3,4)
+plt.xticks([]), plt.yticks([])
 
-subplot(2,3,5)
-xticks([]), yticks([])
+plt.subplot(2,3,5)
+plt.xticks([]), plt.yticks([])
 
-subplot(2,3,6)
-xticks([]), yticks([])
+plt.subplot(2,3,6)
+plt.xticks([]), plt.yticks([])
 
-savefig('../figures/multiplot_ex.png',dpi=48)
-show()
+# plt.savefig('../figures/multiplot_ex.png',dpi=48)
+plt.show()
