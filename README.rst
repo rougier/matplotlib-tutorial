@@ -27,6 +27,10 @@ Tutorial can be read at http://www.labri.fr/perso/nrougier/teaching/matplotlib/m
 Make sure to also read `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_, N.P. Rougier, M. Droettboom & P. Bourne, Plos Computational Biology 10(9): e1003833. doi:10.1371/journal.pcbi.1003833.
 
 
+See also:
+ * `Numpy tutorial <http://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html>`_
+ * `100 Numpy exercices <http://www.labri.fr/perso/nrougier/teaching/numpy.100/index.html>`_
+
 
 Introduction
 ============
