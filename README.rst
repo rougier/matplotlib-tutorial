@@ -10,17 +10,17 @@ Nicolas P. Rougier
 .. image:: https://zenodo.org/badge/doi/10.5281/zenodo.28747.png
    :target: http://dx.doi.org/10.5281/zenodo.28747
 
-|
-
 .. contents:: Table of Contents
    :local:
    :depth: 1
 
+Sources are available from
+`github <https://github.com/rougier/matplotlib-tutorial>`_
 
 All code and material is licensed under a `Creative Commons
 Attribution-ShareAlike 4.0
-<http://creativecommons.org/licenses/by-sa/4.0>`_. Sources are available from
-`github <https://github.com/rougier/matplotlib-tutorial>`_
+<http://creativecommons.org/licenses/by-sa/4.0>`_.
+
 
 Tutorial can be read at http://www.labri.fr/perso/nrougier/teaching/matplotlib/matplotlib.html
 
