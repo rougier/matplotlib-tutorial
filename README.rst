@@ -2,12 +2,17 @@
 Matplotlib tutorial
 ===================
 
+
 ------------------
 Nicolas P. Rougier
 ------------------
 
+.. image:: https://zenodo.org/badge/doi/10.5281/zenodo.28747.png
+   :target: http://dx.doi.org/10.5281/zenodo.28747
 
-.. contents::
+|
+
+.. contents:: Table of Contents
    :local:
    :depth: 1
 
