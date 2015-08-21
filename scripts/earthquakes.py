@@ -49,9 +49,9 @@ P = np.zeros(50, dtype=[('position', float, 2),
                         ('color',    float, 4)])
 
 # Basemap projection
-map = Basemap(projection='mill')
-map.drawcoastlines(color='0.50', linewidth=0.25)
-map.fillcontinents(color='0.95')
+earth = Basemap(projection='mill')
+earth.drawcoastlines(color='0.50', linewidth=0.25)
+earth.fillcontinents(color='0.95')
 scat = ax.scatter(P['position'][:,0], P['position'][:,1], P['size'], lw=0.5,
                   edgecolors = P['color'], facecolors='None', zorder=10)
 
@@ -64,7 +64,7 @@ def update(frame):
     P['size'] += P['growth']
 
     magnitude = E['magnitude'][current]
-    P['position'][i] = map(*E['position'][current])
+    P['position'][i] = earth(*E['position'][current])
     P['size'][i] = 5
     P['growth'][i]= np.exp(magnitude) * 0.1
 

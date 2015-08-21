@@ -754,7 +754,7 @@ put some eye candy:
        P['size'] += P['growth']
 
        magnitude = E['magnitude'][current]
-       P['position'][i] = map(*E['position'][current])
+       P['position'][i] = earth(*E['position'][current])
        P['size'][i] = 5
        P['growth'][i]= np.exp(magnitude) * 0.1
 
