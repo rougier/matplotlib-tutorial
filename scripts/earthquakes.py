@@ -41,7 +41,7 @@ for i in range(len(data)):
     E['magnitude'][i] = float(row[4])
 
 
-fig = plt.figure(figsize=(14,10))
+fig = plt.figure(figsize=(10,8))
 ax = plt.subplot(1,1,1)
 P = np.zeros(50, dtype=[('position', float, 2),
                         ('size',     float, 1),
