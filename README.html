@@ -749,7 +749,7 @@ command.</p>
 care of filled areas:</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 n = 256
 X = np.linspace(-np.pi,np.pi,n,endpoint=True)
@@ -772,7 +772,7 @@ plt.show()
 care of marker size, color and transparency.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 n = 1024
 X = np.random.normal(0,1,n)
@@ -794,7 +794,7 @@ plt.show()
 adding labels for red bars.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 n = 12
 X = np.arange(n)
@@ -824,7 +824,7 @@ command.</p>
 care of the colormap (see <a class="reference internal" href="#colormaps">Colormaps</a> below).</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
 
@@ -851,7 +851,7 @@ use a <a class="reference external" href="http://matplotlib.sourceforge.net/api/
 care of colormap, image interpolation and origin.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
 
@@ -875,7 +875,7 @@ plt.show()
 care of colors and slices size.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 n = 20
 Z = np.random.uniform(0,1,n)
@@ -895,7 +895,7 @@ plt.show()
 care of colors and orientations.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 n = 8
 X,Y = np.mgrid[0:n,0:n]
@@ -911,7 +911,7 @@ plt.show()
 care of line styles.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 axes = gca()
 axes.set_xlim(0,4)
@@ -933,7 +933,7 @@ plt.show()
 <p>Starting from the code below, try to reproduce the graphic on the right.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 plt.subplot(2,2,1)
 plt.subplot(2,2,3)
@@ -953,7 +953,7 @@ plt.show()
 <p>Starting from the code below, try to reproduce the graphic on the right.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 plt.axes([0,0,1,1])
 
@@ -981,7 +981,7 @@ plt.show()
 <p>Starting from the code below, try to reproduce the graphic on the right.</p>
 <pre class="literal-block">
 import numpy as np
-import maplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 fig = plt.figure()
