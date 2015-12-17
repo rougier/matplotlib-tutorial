@@ -841,7 +841,7 @@ Starting from the code below, try to reproduce the graphic on the right taking
 care of filled areas::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    n = 256
    X = np.linspace(-np.pi,np.pi,n,endpoint=True)
@@ -873,7 +873,7 @@ care of marker size, color and transparency.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    n = 1024
    X = np.random.normal(0,1,n)
@@ -905,7 +905,7 @@ adding labels for red bars.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    n = 12
    X = np.arange(n)
@@ -943,7 +943,7 @@ care of the colormap (see `Colormaps`_ below).
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
 
@@ -980,7 +980,7 @@ care of colormap, image interpolation and origin.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
 
@@ -1011,7 +1011,7 @@ care of colors and slices size.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    n = 20
    Z = np.random.uniform(0,1,n)
@@ -1039,7 +1039,7 @@ care of colors and orientations.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    n = 8
    X,Y = np.mgrid[0:n,0:n]
@@ -1064,7 +1064,7 @@ care of line styles.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    axes = gca()
    axes.set_xlim(0,4)
@@ -1094,7 +1094,7 @@ Starting from the code below, try to reproduce the graphic on the right.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    plt.subplot(2,2,1)
    plt.subplot(2,2,3)
@@ -1122,7 +1122,7 @@ Starting from the code below, try to reproduce the graphic on the right.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
 
    plt.axes([0,0,1,1])
 
@@ -1159,7 +1159,7 @@ Starting from the code below, try to reproduce the graphic on the right.
 ::
 
    import numpy as np
-   import maplotlib.pyplot as plt
+   import matplotlib.pyplot as plt
    from mpl_toolkits.mplot3d import Axes3D
 
    fig = plt.figure()
