@@ -25,5 +25,5 @@ plt.text(-0.05, .975, " Display an image to current axes ",
           size='medium',
           transform = gca().transAxes)
 
-plt.savefig('../figures/imshow.png', dpi=64)
-
+#plt.savefig('../figures/imshow.png', dpi=64)
+plt.show()

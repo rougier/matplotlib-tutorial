@@ -15,7 +15,7 @@ X,Y = np.meshgrid(x,y)
 Z = f(X,Y)
 
 plt.axes([0.025,0.025,0.95,0.95])
-plt.imshow(Z,interpolation='nearest', cmap='bone', origin='lower')
+plt.imshow(Z,interpolation='bicubic', cmap='bone', origin='lower')
 plt.colorbar(shrink=.92)
 
 plt.xticks([]), plt.yticks([])

@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------
-# Copyright (c) 2015, Nicolas P. Rougier. All Rights Reserved.
+# Copyright (c) 2014, Nicolas P. Rougier. All Rights Reserved.
 # Distributed under the (new) BSD License.
 # -----------------------------------------------------------------------------
 # Based on : https://peak5390.wordpress.com
@@ -23,7 +23,7 @@ feed = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/"
 # url = urllib.urlopen(feed + "significant_month.csv")
 
 # Earthquakes of magnitude > 4.5 in the past 30 days
-url = urllib.urlopen(feed + "4.5_month.csv")
+url = urllib.request.urlopen(feed + "4.5_month.csv")
 
 # Earthquakes of magnitude > 2.5 in the past 30 days
 # url = urllib.urlopen(feed + "2.5_month.csv")
@@ -32,16 +32,17 @@ url = urllib.urlopen(feed + "4.5_month.csv")
 # url = urllib.urlopen(feed + "1.0_month.csv")
 
 # Set earthquake data
-data = url.read().split('\n')[+1:-1]
+data = url.read()
+data = data.split(b'\n')[+1:-1]
 E = np.zeros(len(data), dtype=[('position',  float, 2),
                                ('magnitude', float, 1)])
 for i in range(len(data)):
-    row = data[i].split(',')
+    row = data[i].split(b',')
     E['position'][i] = float(row[2]),float(row[1])
     E['magnitude'][i] = float(row[4])
 
 
-fig = plt.figure(figsize=(10,8))
+fig = plt.figure(figsize=(14,10))
 ax = plt.subplot(1,1,1)
 P = np.zeros(50, dtype=[('position', float, 2),
                         ('size',     float, 1),
@@ -49,9 +50,9 @@ P = np.zeros(50, dtype=[('position', float, 2),
                         ('color',    float, 4)])
 
 # Basemap projection
-earth = Basemap(projection='mill')
-earth.drawcoastlines(color='0.50', linewidth=0.25)
-earth.fillcontinents(color='0.95')
+map = Basemap(projection='mill')
+map.drawcoastlines(color='0.50', linewidth=0.25)
+map.fillcontinents(color='0.95')
 scat = ax.scatter(P['position'][:,0], P['position'][:,1], P['size'], lw=0.5,
                   edgecolors = P['color'], facecolors='None', zorder=10)
 
@@ -64,7 +65,7 @@ def update(frame):
     P['size'] += P['growth']
 
     magnitude = E['magnitude'][current]
-    P['position'][i] = earth(*E['position'][current])
+    P['position'][i] = map(*E['position'][current])
     P['size'][i] = 5
     P['growth'][i]= np.exp(magnitude) * 0.1
 
@@ -76,9 +77,7 @@ def update(frame):
     scat.set_facecolors(P['color']*(1,1,1,0.25))
     scat.set_sizes(P['size'])
     scat.set_offsets(P['position'])
-    return scat,
 
-
-plt.title("Earthquakes > 4.5 in the last 30 days (18/08/2015)")
+plt.title("Earthquakes > 4.5 in the last 30 days")
 animation = FuncAnimation(fig, update, interval=10)
 plt.show()
