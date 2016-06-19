@@ -21,15 +21,16 @@ All code and material is licensed under a `Creative Commons
 Attribution-ShareAlike 4.0
 <http://creativecommons.org/licenses/by-sa/4.0>`_.
 
+You can test your installation before the tutorial using the `check-installation.py <https://github.com/rougier/matplotlib-tutorial/blob/master/scripts/check-installation.py>`_ script.
 
 Tutorial can be read at http://www.labri.fr/perso/nrougier/teaching/matplotlib/matplotlib.html
 
-Make sure to also read `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_, N.P. Rougier, M. Droettboom & P. Bourne, Plos Computational Biology 10(9): e1003833. doi:10.1371/journal.pcbi.1003833.
-
 
 See also:
- * `Numpy tutorial <http://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html>`_
- * `100 Numpy exercices <http://www.labri.fr/perso/nrougier/teaching/numpy.100/index.html>`_
+
+* * `Numpy tutorial <http://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html>`_
+* * `100 Numpy exercices <http://www.labri.fr/perso/nrougier/teaching/numpy.100/index.html>`_
+* * `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_
 
 
 Introduction
