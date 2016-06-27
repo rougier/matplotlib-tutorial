@@ -2,7 +2,7 @@ from pylab import *
 
 axes([0.1,0.1,.5,.5])
 xticks([]), yticks([])
-text(0.1,0.1, 'axes([0.1,0.1,.8,.8])',ha='left',va='center',size=16,alpha=.5)
+text(0.1,0.1, 'axes([0.1,0.1,.5,.5])',ha='left',va='center',size=16,alpha=.5)
 
 axes([0.2,0.2,.5,.5])
 xticks([]), yticks([])
