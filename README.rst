@@ -690,19 +690,20 @@ time of event (ok, that's bad, feel free to send me a PR).
    feed = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/"
 
    # Significant earthquakes in the last 30 days
-   # url = urllib.urlopen(feed + "significant_month.csv")
+   # url = urllib.request.urlopen(feed + "significant_month.csv")
 
    # Magnitude > 4.5
-   url = urllib.urlopen(feed + "4.5_month.csv")
+   url = urllib.request.urlopen(feed + "4.5_month.csv")
 
    # Magnitude > 2.5
-   # url = urllib.urlopen(feed + "2.5_month.csv")
+   # url = urllib.request.urlopen(feed + "2.5_month.csv")
 
    # Magnitude > 1.0
-   # url = urllib.urlopen(feed + "1.0_month.csv")
+   # url = urllib.request.urlopen(feed + "1.0_month.csv")
 
    # Reading and storage of data
-   data = url.read().split('\n')[+1:-1]
+   data = url.read()
+   data = data.split(b'\n')[+1:-1]
    E = np.zeros(len(data), dtype=[('position',  float, 2),
                                   ('magnitude', float, 1)])
 

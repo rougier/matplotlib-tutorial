@@ -641,19 +641,20 @@ time of event (ok, that's bad, feel free to send me a PR).</p>
 <span class="name">feed</span> <span class="operator">=</span> <span class="literal string double">&quot;http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/&quot;</span>
 
 <span class="comment single"># Significant earthquakes in the last 30 days</span>
-<span class="comment single"># url = urllib.urlopen(feed + &quot;significant_month.csv&quot;)</span>
+<span class="comment single"># url = urllib.request.urlopen(feed + &quot;significant_month.csv&quot;)</span>
 
 <span class="comment single"># Magnitude &gt; 4.5</span>
-<span class="name">url</span> <span class="operator">=</span> <span class="name">urllib</span><span class="operator">.</span><span class="name">urlopen</span><span class="punctuation">(</span><span class="name">feed</span> <span class="operator">+</span> <span class="literal string double">&quot;4.5_month.csv&quot;</span><span class="punctuation">)</span>
+<span class="name">url</span> <span class="operator">=</span> <span class="name">urllib</span><span class="operator">.</span><span class="name">request</span><span class="operator">.</span><span class="name">urlopen</span><span class="punctuation">(</span><span class="name">feed</span> <span class="operator">+</span> <span class="literal string double">&quot;4.5_month.csv&quot;</span><span class="punctuation">)</span>
 
 <span class="comment single"># Magnitude &gt; 2.5</span>
-<span class="comment single"># url = urllib.urlopen(feed + &quot;2.5_month.csv&quot;)</span>
+<span class="comment single"># url = urllib.request.urlopen(feed + &quot;2.5_month.csv&quot;)</span>
 
 <span class="comment single"># Magnitude &gt; 1.0</span>
-<span class="comment single"># url = urllib.urlopen(feed + &quot;1.0_month.csv&quot;)</span>
+<span class="comment single"># url = urllib.request.urlopen(feed + &quot;1.0_month.csv&quot;)</span>
 
 <span class="comment single"># Reading and storage of data</span>
-<span class="name">data</span> <span class="operator">=</span> <span class="name">url</span><span class="operator">.</span><span class="name">read</span><span class="punctuation">()</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="literal string single">'</span><span class="literal string escape">\n</span><span class="literal string single">'</span><span class="punctuation">)[</span><span class="operator">+</span><span class="literal number integer">1</span><span class="punctuation">:</span><span class="operator">-</span><span class="literal number integer">1</span><span class="punctuation">]</span>
+<span class="name">data</span> <span class="operator">=</span> <span class="name">url</span><span class="operator">.</span><span class="name">read</span><span class="punctuation">()</span>
+<span class="name">data</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">split</span><span class="punctuation">(</span><span class="name">b</span><span class="literal string single">'</span><span class="literal string escape">\n</span><span class="literal string single">'</span><span class="punctuation">)[</span><span class="operator">+</span><span class="literal number integer">1</span><span class="punctuation">:</span><span class="operator">-</span><span class="literal number integer">1</span><span class="punctuation">]</span>
 <span class="name">E</span> <span class="operator">=</span> <span class="name">np</span><span class="operator">.</span><span class="name">zeros</span><span class="punctuation">(</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">data</span><span class="punctuation">),</span> <span class="name">dtype</span><span class="operator">=</span><span class="punctuation">[(</span><span class="literal string single">'position'</span><span class="punctuation">,</span>  <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">2</span><span class="punctuation">),</span>
                                <span class="punctuation">(</span><span class="literal string single">'magnitude'</span><span class="punctuation">,</span> <span class="name builtin">float</span><span class="punctuation">,</span> <span class="literal number integer">1</span><span class="punctuation">)])</span>
 
