@@ -7,7 +7,7 @@ Matplotlib tutorial
 Nicolas P. Rougier
 ------------------
 
-.. image:: https://zenodo.org/badge/doi/10.5281/zenodo.28747.png
+.. image:: https://zenodo.org/badge/doi/10.5281/zenodo.28747.svg
    :target: http://dx.doi.org/10.5281/zenodo.28747
 
 .. contents:: Table of Contents
