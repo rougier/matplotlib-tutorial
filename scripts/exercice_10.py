@@ -17,8 +17,10 @@ ax.spines['left'].set_position(('data',0))
 X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
 C,S = np.cos(X), np.sin(X)
 
-plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-", label="cosine")
-plt.plot(X, S, color="red", linewidth=2.5, linestyle="-",  label="sine")
+plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-", label="cosine",
+         zorder=-1)
+plt.plot(X, S, color="red", linewidth=2.5, linestyle="-",  label="sine",
+         zorder=-2)
 
 
 plt.xlim(X.min()*1.1, X.max()*1.1)
