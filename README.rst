@@ -421,7 +421,7 @@ The defaults can be specified in the resource file and will be used most of the
 time. Only the number of the figure is frequently changed.
 
 When you work with the GUI you can close a figure by clicking on the x in the
-upper right corner. But you can also close a figure programmatically by calling
+upper right corner. You can also close a figure programmatically by calling
 close. Depending on the argument it closes (1) the current figure (no
 argument), (2) a specific figure (figure number or figure instance as
 argument), or (3) all figures (all as argument).
