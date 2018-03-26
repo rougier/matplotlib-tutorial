@@ -46,7 +46,7 @@ IPython and the pylab mode
 
 `IPython <http://ipython.org/>`_ is an enhanced interactive Python shell that
 has lots of interesting features including named inputs and outputs, access to
-shell commands, improved debugging and many more. When we start it with the
+shell commands, improved debugging and much more. When we start it with the
 command line argument -pylab (--pylab since IPython version 0.12), it allows
 interactive matplotlib sessions that have Matlab/Mathematica-like functionality.
 
@@ -68,17 +68,17 @@ In this section, we want to draw the cosine and sine functions on the same
 plot. Starting from the default settings, we'll enrich the figure step by step
 to make it nicer.
 
-First step is to get the data for the sine and cosine functions:
+The first step is to get the data for the sine and cosine functions:
 
 ::
 
    import numpy as np
 
-   X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
-   C,S = np.cos(X), np.sin(X)
+   X = np.linspace(-np.pi, np.pi, 256, endpoint=True)
+   C, S = np.cos(X), np.sin(X)
 
 
-X is now a numpy array with 256 values ranging from -π to +π (included). C is
+X is now a NumPy array with 256 values ranging from -π to +π (included). C is
 the cosine (256 values) and S is the sine (256 values).
 
 To run the example, you can download each of the examples and run it using::
@@ -148,7 +148,7 @@ Changing colors and line widths
    :align: right
    :target: scripts/exercice_3.py
 
-First step, we want to have the cosine in blue and the sine in red and a
+As a first step, we want to have the cosine in blue and the sine in red and a
 slightly thicker line for both of them. We'll also slightly alter the figure
 size to make it more horizontal.
 
@@ -325,7 +325,7 @@ Annotate some points
    :align: right
    :target: scripts/exercice_9.py
 
-Let's annotate some interesting points using the annotate command. We chose the
+Let's annotate some interesting points using the annotate command. We choose the
 2π/3 value and we want to annotate both the sine and the cosine. We'll first
 draw a marker on the curve as well as a straight dotted line. Then, we'll use
 the annotate command to display some text with an arrow.
@@ -421,7 +421,7 @@ The defaults can be specified in the resource file and will be used most of the
 time. Only the number of the figure is frequently changed.
 
 When you work with the GUI you can close a figure by clicking on the x in the
-upper right corner. But you can close a figure programmatically by calling
+upper right corner. But you can also close a figure programmatically by calling
 close. Depending on the argument it closes (1) the current figure (no
 argument), (2) a specific figure (figure number or figure instance as
 argument), or (3) all figures (all as argument).
@@ -468,7 +468,7 @@ Well formatted ticks are an important part of publishing-ready
 figures. Matplotlib provides a totally configurable system for ticks. There are
 tick locators to specify where ticks should appear and tick formatters to give
 ticks the appearance you want. Major and minor ticks can be located and
-formatted independently from each other. Per default minor ticks are not shown,
+formatted independently from each other. By default minor ticks are not shown,
 i.e. there is only an empty list for them because it is as NullLocator (see
 below).
 
@@ -534,7 +534,7 @@ For quite a long time, animation in matplotlib was not an easy task and was
 done mainly through clever hacks. However, things have started to change since
 version 1.1 and the introduction of tools for creating animation very
 intuitively, with the possibility to save them in all kind of formats (but don't
-expect to be able to run very complex animation at 60 fps though).
+expect to be able to run very complex animations at 60 fps though).
 
 .. admonition:: Documentation
 
@@ -567,10 +567,10 @@ First step is to create a blank figure:
    
 Next, we need to create several rings. For this, we can use the scatter plot
 object that is generally used to visualize points cloud, but we can also use it
-to draw rings by specifying we don't have a facecolor. We have also to take
-care of initial size and color for each ring such that we have all size between
-a minimum and a maximum size and also to make sure the largest ring is almost
-transparent.
+to draw rings by specifying we don't have a facecolor. We also have to take
+care of initial size and color for each ring such that we have all sizes between
+a minimum and a maximum size. In addition, we need to make sure the largest ring 
+is almost transparent.
 
 
 .. image:: figures/rain-static.png
@@ -606,10 +606,10 @@ transparent.
 
 
 Now, we need to write the update function for our animation. We know that at
-each time step each ring should grow be more transparent while largest ring
-should be totally transparent and thus removed. Of course, we won't actually
-remove the largest ring but re-use it to set a new ring at a new random
-position, with nominal size and color. Hence, we keep the number of ring
+each time step each ring should grow and become more transparent while the 
+largest ring should be totally transparent and thus removed. Of course, we won't 
+actually remove the largest ring but re-use it to set a new ring at a new random
+position, with nominal size and color. Hence, we keep the number of rings
 constant.
 
   
@@ -670,7 +670,7 @@ this already represent more than 300 earthquakes in the last 30 days.
 
 
 First step is to read and convert data. We'll use the `urllib` library that
-allows to open and read remote data. Data on the website use the `CSV` format
+allows us to open and read remote data. Data on the website use the `CSV` format
 whose content is given by the first line::
 
   time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type
@@ -713,7 +713,7 @@ time of event (ok, that's bad, feel free to send me a PR).
        E['magnitude'][i] = float(row[4])
 
 
-Now, we need to draw earth on a figure to show precisely where the earthquake
+Now, we need to draw the earth on a figure to show precisely where the earthquake
 center is and to translate latitude/longitude in some coordinates matplotlib
 can handle. Fortunately, there is the `basemap
 <http://matplotlib.org/basemap/>`_ project (that tends to be replaced by the
@@ -738,7 +738,7 @@ Next, we request to draw coastline and fill continents:
    earth.drawcoastlines(color='0.50', linewidth=0.25)
    earth.fillcontinents(color='0.95')
 
-The `earth` object will also be used to translate coordinate quite
+The `earth` object will also be used to translate coordinates quite
 automatically. We are almost finished. Last step is to adapt the rain code and
 put some eye candy:
 
@@ -840,7 +840,9 @@ Regular Plots
    command.
 
 Starting from the code below, try to reproduce the graphic on the right taking
-care of filled areas::
+care of filled areas.
+
+::
 
    import numpy as np
    import matplotlib.pyplot as plt
@@ -973,7 +975,7 @@ Imshow
 
    You need to take care of the ``origin`` of the image in the imshow command and
    use a `colorbar
-   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.colorbar>`_
+   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.colorbar>`_.
 
 
 Starting from the code below, try to reproduce the graphic on the right taking
@@ -1116,7 +1118,7 @@ Polar Axis
 
 .. admonition:: Hints
 
-   You only need to modify the ``axes`` line
+   You only need to modify the ``axes`` line.
 
 
 Starting from the code below, try to reproduce the graphic on the right.
@@ -1153,7 +1155,7 @@ Click on figure for solution.
 .. admonition:: Hints
 
    You need to use `contourf
-   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.contourf>`_
+   <http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.contourf>`_.
 
 
 Starting from the code below, try to reproduce the graphic on the right.
@@ -1192,7 +1194,7 @@ Text
    Have a look at the `matplotlib logo
    <http://matplotlib.sourceforge.net/examples/api/logo2.html>`_.
 
-Try to do the same from scratch !
+Try to do the same from scratch!
 
 Click on figure for solution.
 
@@ -1663,7 +1665,7 @@ Colormaps
 All colormaps can be reversed by appending ``_r``. For instance, ``gray_r`` is
 the reverse of ``gray``.
 
-If you want to know more about colormaps, checks `Documenting the matplotlib
+If you want to know more about colormaps, see `Documenting the matplotlib
 colormaps <https://gist.github.com/2719900>`_.
 
 
