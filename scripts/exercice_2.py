@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Create a new figure of size 8x6 points, using 100 dots per inch
-plt.figure(figsize=(8,6), dpi=80)
+plt.figure(figsize=(8,6), dpi=100)
 
 # Create a new subplot from a grid of 1x1
 plt.subplot(111)
