@@ -23,13 +23,10 @@ Attribution-ShareAlike 4.0
 
 You can test your installation before the tutorial using the `check-installation.py <scripts/check-installation.py>`_ script.
 
-Tutorial can be read at http://www.labri.fr/perso/nrougier/teaching/matplotlib/matplotlib.html
-
-
 See also:
 
-* `Numpy tutorial <http://www.labri.fr/perso/nrougier/teaching/numpy/numpy.html>`_
-* `100 Numpy exercices <http://www.labri.fr/perso/nrougier/teaching/numpy.100/index.html>`_
+* `From Python to Numpy <http://www.labri.fr/perso/nrougier/from-python-to-numpy/>`_
+* `100 Numpy exercices <https://github.com/rougier/numpy-100>`_
 * `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_
 
 
