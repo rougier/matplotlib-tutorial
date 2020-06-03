@@ -1,4 +1,5 @@
-from pylab import *
+import matplotlib.pyplot as plt
+import numpy as np
 
 def colormap(cmap,filename):
     n = 512
@@ -8,14 +9,14 @@ def colormap(cmap,filename):
     figsize= size[0]/float(dpi),size[1]/float(dpi)
     fig = plt.figure(figsize=figsize, dpi=dpi)
     fig.patch.set_alpha(0)
-    axes([0.,0.,1.,1.], frameon=False)
-    xticks([]), yticks([])
-    imshow(Z,aspect='auto',cmap=cmap,origin="lower")
-    savefig( "../figures/cmap-%s.png" % filename, dpi=dpi )
+    plt.axes([0.,0.,1.,1.], frameon=False)
+    plt.xticks([]), plt.yticks([])
+    plt.imshow(Z,aspect='auto',cmap=cmap,origin="lower")
+    plt.savefig( "../figures/cmap-%s.png" % filename, dpi=dpi )
 
 
 
-cmaps = [m for m in cm.datad if not m.endswith("_r")]
+cmaps = [m for m in plt.cm.datad if not m.endswith("_r")]
 cmaps.sort()
 
 #print """

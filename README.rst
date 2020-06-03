@@ -1285,8 +1285,8 @@ command from within a python session:
 
 ::
 
-   >>> from pylab import *
-   >>> help(plot)
+   >>> import matplotlib.pyplot as plt
+   >>> help(plt)
    Help on function plot in module matplotlib.pyplot:
 
    plot(*args, **kwargs)
