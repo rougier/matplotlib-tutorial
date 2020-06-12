@@ -12,7 +12,7 @@ def linestyle(ls,name):
     plot(X,Y,ls,color=(.0,.0,1,1), lw=3, ms=10, mfc=(.75,.75,1,1), mec=(0,0,1,1))
     xlim(0,10)
     xticks([]), yticks([])
-    print'../figures/linestyle-%s.png' % name
+    print('../figures/linestyle-%s.png' % name)
     savefig('../figures/linestyle-%s.png' % name, dpi=dpi)
 
 for ls in ['-','--',':',',','o','^','v','<','>','s',

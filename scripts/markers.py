@@ -12,7 +12,7 @@ def marker(m,name):
     plot(X,Y,color='w', lw=1, marker=m, ms=10, mfc=(.75,.75,1,1), mec=(0,0,1,1))
     xlim(0,10)
     xticks([]), yticks([])
-    print '../figures/marker-%s.png' % name
+    print('../figures/marker-%s.png' % name)
     savefig('../figures/marker-%s.png' % name, dpi=dpi)
 
 #print"""
