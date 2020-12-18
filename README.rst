@@ -1754,7 +1754,7 @@ GIST
      - .. image:: figures/cmap-gist_yarg.png
 
 
-Sequential
+Diverging
 ..........
 
 .. list-table::
@@ -1793,7 +1793,7 @@ Sequential
 
 
 
-Diverging
+Sequential
 .........
 
 .. list-table::
