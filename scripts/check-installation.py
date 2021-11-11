@@ -37,23 +37,30 @@ if LooseVersion(mpl.__version__) < LooseVersion("1.5"):
 else:
     print("ok")
 
-# Check for basemap
+# Check for basemap or cartopy
 try:
-    import mpl_toolkits.basemap as basemap 
+    import mpl_toolkits.basemap as basemap
+    check_for_cartopy = False
 except:
-    print("This tutorial requires basemap\n")
-    sys.exit()
-print("Check for basemap: ", end="")
-if LooseVersion(basemap.__version__) < LooseVersion("1.0"):
-    print("basemape is too old (< 1.0) \n")
-    sys.exit()
+    check_for_cartopy = True
 else:
-    print("ok")
-        
-# Check for urllib
-try:
-    import urllib
-except:
-    print("This tutorial requires urllib")
-else:
-    print("Check for urllib: ok")
+    print("Check for basemap: ", end="")
+    if LooseVersion(basemap.__version__) < LooseVersion("1.0"):
+        print("basemap is too old (< 1.0) \n")
+        sys.exit()
+    else:
+        print("ok")
+
+if check_for_cartopy:
+    try:
+        import cartopy
+    except:
+        print("This tutorial requires either basemap or cartopy\n")
+        sys.exit()
+
+    print("Check for cartopy: ", end="")
+    if LooseVersion(cartopy.__version__) < LooseVersion("0.15"):
+        print("cartopy is too old (< 0.15) \n")
+        sys.exit()
+    else:
+        print("ok")
