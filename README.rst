@@ -657,7 +657,7 @@ Earthquakes
 We'll now use the rain animation to visualize earthquakes on the planet from
 the last 30 days. The USGS Earthquake Hazards Program is part of the National
 Earthquake Hazards Reduction Program (NEHRP) and provides several data on their
-`website <http://earthquake.usgs.gov>`_. Those data are sorted according to
+`website <https://earthquake.usgs.gov>`_. Those data are sorted according to
 earthquakes magnitude, ranging from significant only down to all earthquakes,
 major or minor. You would be surprised by the number of minor earthquakes
 happening every hour on the planet. Since this would represent too much data
@@ -675,15 +675,14 @@ whose content is given by the first line::
 
 We are only interested in latitude, longitude and magnitude and we won't parse
 time of event (ok, that's bad, feel free to send me a PR).
-  
+
 
 .. code:: python
 
    import urllib
-   from mpl_toolkits.basemap import Basemap
 
-   # -> http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php
-   feed = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/"
+   # -> https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php
+   feed = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/"
 
    # Significant earthquakes in the last 30 days
    # url = urllib.request.urlopen(feed + "significant_month.csv")
@@ -701,10 +700,10 @@ time of event (ok, that's bad, feel free to send me a PR).
    data = url.read()
    data = data.split(b'\n')[+1:-1]
    E = np.zeros(len(data), dtype=[('position',  float, 2),
-                                  ('magnitude', float, 1)])
+                                  ('magnitude', float)])
 
    for i in range(len(data)):
-       row = data[i].split(',')
+       row = data[i].split(b',')
        E['position'][i] = float(row[2]),float(row[1])
        E['magnitude'][i] = float(row[4])
 
@@ -712,39 +711,53 @@ time of event (ok, that's bad, feel free to send me a PR).
 Now, we need to draw the earth on a figure to show precisely where the earthquake
 center is and to translate latitude/longitude in some coordinates matplotlib
 can handle. Fortunately, there is the `basemap
-<http://matplotlib.org/basemap/>`_ project (that tends to be replaced by the
-more complete `cartopy <http://scitools.org.uk/cartopy/>`_) that is really
+<https://matplotlib.org/basemap/>`_ project (which is now deprecated in favor
+of the `cartopy <https://scitools.org.uk/cartopy/docs/latest/>`_ project) that is really
 simple to install and to use. First step is to define a projection to draw the
 earth onto a screen (there exists many different projections) and we'll stick
 to the `mill` projection which is rather standard for non-specialist like me.
-       
+
 
 .. code:: python
 
+   from mpl_toolkits.basemap import Basemap
    fig = plt.figure(figsize=(14,10))
    ax = plt.subplot(1,1,1)
 
-   earth = Basemap(projection='mill')
+   map = Basemap(projection='mill')
 
 
 Next, we request to draw coastline and fill continents:
 
 .. code:: python
-          
-   earth.drawcoastlines(color='0.50', linewidth=0.25)
-   earth.fillcontinents(color='0.95')
 
-The `earth` object will also be used to translate coordinates quite
-automatically. We are almost finished. Last step is to adapt the rain code and
-put some eye candy:
+   map.drawcoastlines(color='0.50', linewidth=0.25)
+   map.fillcontinents(color='0.95')
+
+For cartopy, the steps are quite similar:
+
+.. code:: python
+
+    import cartopy
+    ax = plt.axes(projection=cartopy.crs.Miller())
+    ax.coastlines(color='0.50', linewidth=0.25)
+    ax.add_feature(cartopy.feature.LAND, color='0.95')
+    ax.set_global()
+    trans = cartopy.crs.PlateCarree()
+
+
+We are almost finished. Last step is to adapt the rain code and
+put some eye candy. For basemap we use the map object to
+transform the coordinates whereas for cartopy we use the transform_point
+function of the chosen Miller projection:
 
 
 .. code:: python
 
    P = np.zeros(50, dtype=[('position', float, 2),
-                            ('size',     float, 1),
-                            ('growth',   float, 1),
-                            ('color',    float, 4)])
+                            ('size',    float),
+                            ('growth',  float),
+                            ('color',   float, 4)])
    scat = ax.scatter(P['position'][:,0], P['position'][:,1], P['size'], lw=0.5,
                      edgecolors = P['color'], facecolors='None', zorder=10)
 
@@ -756,7 +769,8 @@ put some eye candy:
        P['size'] += P['growth']
 
        magnitude = E['magnitude'][current]
-       P['position'][i] = earth(*E['position'][current])
+       P['position'][i] = map(*E['position'][current]) if use_basemap else \
+           cartopy.crs.Miller().transform_point(*E['position'][current], cartopy.crs.PlateCarree())
        P['size'][i] = 5
        P['growth'][i]= np.exp(magnitude) * 0.1
 
@@ -770,8 +784,8 @@ put some eye candy:
        scat.set_offsets(P['position'])
        return scat,
 
-       
-   animation = FuncAnimation(fig, update, interval=10)
+
+   animation = FuncAnimation(fig, update, interval=10, blit=True)
    plt.show()
 
 
@@ -781,7 +795,7 @@ If everything went well, you should obtain something like this (with animation):
    :target: scripts/earthquakes.py
    :width: 50%
 
-   
+
 Other Types of Plots
 ====================
 
