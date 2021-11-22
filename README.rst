@@ -1302,25 +1302,39 @@ command from within a python session:
    >>> help(plt.plot)
    Help on function plot in module matplotlib.pyplot:
 
-   plot(*args, **kwargs)
-      Plot lines and/or markers to the
-      :class:`~matplotlib.axes.Axes`.  *args* is a variable length
-      argument, allowing for multiple *x*, *y* pairs with an
-      optional format string.  For example, each of the following is
-      legal::
-    
-          plot(x, y)         # plot x and y using default line style and color
-          plot(x, y, 'bo')   # plot x and y using blue circle markers
-          plot(y)            # plot y using x as index array 0..N-1
-          plot(y, 'r+')      # ditto, but with red plusses
-    
-      If *x* and/or *y* is 2-dimensional, then the corresponding columns
-      will be plotted.
+   plot(*args, scalex=True, scaley=True, data=None, **kwargs)
+      Plot y versus x as lines and/or markers.
+
+      Call signatures::
+
+        plot([x], y, [fmt], *, data=None, **kwargs)
+        plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+
+      The coordinates of the points or line nodes are given by *x*, *y*.
+
+      The optional parameter *fmt* is a convenient way for defining basic
+      formatting like color, marker and linestyle. It's a shortcut string
+      notation described in the *Notes* section below.
+
+      >>> plot(x, y)        # plot x and y using default line style and color
+      >>> plot(x, y, 'bo')  # plot x and y using blue circle markers
+      >>> plot(y)           # plot y using x as index array 0..N-1
+      >>> plot(y, 'r+')     # ditto, but with red plusses
+
+      You can use `.Line2D` properties as keyword arguments for more
+      control on the appearance. Line properties and *fmt* can be mixed.
+      The following two calls yield identical results:
+
+      >>> plot(x, y, 'go--', linewidth=2, markersize=12)
+      >>> plot(x, y, color='green', marker='o', linestyle='dashed',
+      ...      linewidth=2, markersize=12)
+      
+      When conflicting with *fmt*, keyword arguments take precedence.
       ...
 
 Galleries
 ---------
-
+   
 The `matplotlib gallery <http://matplotlib.sourceforge.net/gallery.html>`_ is
 also incredibly useful when you search how to render a given graphic. Each
 example comes with its source.
