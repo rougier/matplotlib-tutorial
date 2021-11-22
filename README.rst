@@ -1299,7 +1299,7 @@ command from within a python session:
 ::
 
    >>> import matplotlib.pyplot as plt
-   >>> help(plt)
+   >>> help(plt.plot)
    Help on function plot in module matplotlib.pyplot:
 
    plot(*args, **kwargs)
