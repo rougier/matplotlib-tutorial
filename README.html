@@ -609,6 +609,12 @@ the animation and display the result or save it as a movie:</p>
 <span class="comment single"># animation.save('rain.gif', writer='imagemagick', fps=30, dpi=40)</span>
 <span class="name">plt</span><span class="operator">.</span><span class="name">show</span><span class="punctuation">()</span>
 </pre>
+<p>If you use IPython, you'll have to render the animation into an html video
+in order to show it in the Jupyter notebook:</p>
+<pre class="code python literal-block">
+<span class="keyword namespace">from</span> <span class="name namespace">IPython.display</span> <span class="keyword namespace">import</span> <span class="name">HTML</span>
+<span class="name">HTML</span><span class="punctuation">(</span><span class="name">animation</span><span class="operator">.</span><span class="name">to_html5_video</span><span class="punctuation">())</span>
+</pre>
 </div>
 <div class="section" id="earthquakes">
 <h2>Earthquakes</h2>

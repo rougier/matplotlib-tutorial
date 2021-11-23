@@ -649,8 +649,18 @@ the animation and display the result or save it as a movie:
    # animation.save('rain.gif', writer='imagemagick', fps=30, dpi=40)
    plt.show()
 
-   
-   
+
+If you use IPython, you'll have to render the animation into an html video
+in order to show it in the Jupyter notebook:
+
+
+.. code:: python
+
+    from IPython.display import HTML
+    HTML(animation.to_html5_video())
+
+
+
 Earthquakes
 -----------
 
