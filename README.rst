@@ -1335,8 +1335,6 @@ The `matplotlib gallery <http://matplotlib.sourceforge.net/gallery.html>`_ is
 also incredibly useful when you search how to render a given graphic. Each
 example comes with its source.
 
-A smaller gallery is also available `here <http://www.loria.fr/~rougier/coding/gallery/>`_.
-
 
 Mailing lists
 --------------
