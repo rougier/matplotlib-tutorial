@@ -810,40 +810,40 @@ Other Types of Plots
 ====================
 
 .. image:: figures/plot.png
-   :target: `Regular Plots`_
+   :target: #regular-plots
 
 .. image:: figures/scatter.png
-   :target: `Scatter Plots`_
+   :target: #scatter-plots
 
 .. image:: figures/bar.png
-   :target: `Bar Plots`_
+   :target: #bar-plots
 
 .. image:: figures/contour.png
-   :target: `Contour Plots`_
+   :target: #contour-plots
 
 .. image:: figures/imshow.png
-   :target: `Imshow`_
+   :target: #imshow
 
 .. image:: figures/quiver.png
-   :target: `Quiver Plots`_
+   :target: #quiver-plots
 
 .. image:: figures/pie.png
-   :target: `Pie Charts`_
+   :target: #pie-charts
 
 .. image:: figures/grid.png
-   :target: `Grids`_
+   :target: #grids
 
 .. image:: figures/multiplot.png
-   :target: `Multi Plots`_
+   :target: #multi-plots
 
 .. image:: figures/polar.png
-   :target: `Polar Axis`_
+   :target: #polar-axis
 
 .. image:: figures/plot3d.png
-   :target: `3D Plots`_
+   :target: #3d-plots
 
 .. image:: figures/text.png
-   :target: `Text`_
+   :target: #text
 
 
 Regular Plots
@@ -1334,8 +1334,6 @@ Galleries
 The `matplotlib gallery <http://matplotlib.sourceforge.net/gallery.html>`_ is
 also incredibly useful when you search how to render a given graphic. Each
 example comes with its source.
-
-A smaller gallery is also available `here <http://www.loria.fr/~rougier/coding/gallery/>`_.
 
 
 Mailing lists
