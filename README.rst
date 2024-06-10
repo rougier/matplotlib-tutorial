@@ -15,7 +15,7 @@ Nicolas P. Rougier
    :depth: 1
 
 Sources are available from
-`github <https://github.com/rougier/matplotlib-tutorial>`_
+`GitHub <https://github.com/rougier/matplotlib-tutorial>`_
 
 All code and material is licensed under a `Creative Commons
 Attribution-ShareAlike 4.0
@@ -25,16 +25,16 @@ You can test your installation before the tutorial using the `check-installation
 
 See also:
 
-* `From Python to Numpy <http://www.labri.fr/perso/nrougier/from-python-to-numpy/>`_
-* `100 Numpy exercices <https://github.com/rougier/numpy-100>`_
+* `From Python to NumPy <http://www.labri.fr/perso/nrougier/from-python-to-numpy/>`_
+* `100 NumPy exercises <https://github.com/rougier/numpy-100>`_
 * `Ten simple rules for better figures <http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833>`_
 
 
 Introduction
 ============
 
-matplotlib is probably the single most used Python package for 2D-graphics. It
-provides both a very quick way to visualize data from Python and
+matplotlib use Python package for 2D-graphics. It
+provides data visualization from Python and
 publication-quality figures in many formats.  We are going to explore
 matplotlib in interactive mode covering most common cases.
 
@@ -42,7 +42,7 @@ IPython
 -------
 
 `IPython <http://ipython.org/>`_ is an enhanced interactive Python shell that
-has lots of interesting features including named inputs and outputs, access to
+that include named inputs and outputs, access to
 shell commands, improved debugging and much more. It allows
 interactive matplotlib sessions that have Matlab/Mathematica-like functionality.
 
@@ -61,7 +61,7 @@ Simple plot
 ===========
 
 In this section, we want to draw the cosine and sine functions on the same
-plot. Starting from the default settings, we'll enrich the figure step by step
+plot. In default settings, we'll enrich the figure step by step
 to make it nicer.
 
 The first step is to get the data for the sine and cosine functions:
@@ -97,10 +97,10 @@ Using defaults
    :target: scripts/exercice_1.py
 
 Matplotlib comes with a set of default settings that allow customizing all
-kinds of properties. You can control the defaults of almost every property in
+kinds of properties. You can control the defaults of every property in
 matplotlib: figure size and dpi, line width, color and style, axes, axis and
 grid properties, text and font properties and so on. While matplotlib defaults
-are rather good in most cases, you may want to modify some properties for
+are good in most cases, you may want to modify some properties for
 specific cases.
 
 
@@ -144,8 +144,8 @@ Changing colors and line widths
    :align: right
    :target: scripts/exercice_3.py
 
-As a first step, we want to have the cosine in blue and the sine in red and a
-slightly thicker line for both of them. We'll also slightly alter the figure
+As a first step, we want cosine in blue and the sine in red and a
+slightly thicker line for both. We'll also alter the figure
 size to make it more horizontal.
 
 
@@ -227,7 +227,7 @@ Setting tick labels
    :align: right
    :target: scripts/exercice_6.py
 
-Ticks are now properly placed but their label is not very explicit. We could
+Ticks are fixed but their label is not very explicit. We could
 guess that 3.142 is π but it would be better to make it explicit. When we set
 tick values, we can also provide a corresponding label in the second argument
 list. Note that we'll use latex to allow for nice rendering of the label.
@@ -527,7 +527,7 @@ Animation
 =========
 
 For quite a long time, animation in matplotlib was not an easy task and was
-done mainly through clever hacks. However, things have started to change since
+done through clever hacks. However, things have started to change since
 version 1.1 and the introduction of tools for creating animation very
 intuitively, with the possibility to save them in all kind of formats (but don't
 expect to be able to run very complex animations at 60 fps though).
@@ -536,7 +536,7 @@ expect to be able to run very complex animations at 60 fps though).
 
    *  See `Animation <http://matplotlib.org/api/animation_api.html>`_
 
-The most easy way to make an animation in matplotlib is to declare a
+The easiest way to make an animation in matplotlib is to declare a
 FuncAnimation object that specifies to matplotlib what is the figure to
 update, what is the update function and what is the delay between frames.
 
@@ -544,7 +544,7 @@ update, what is the update function and what is the delay between frames.
 Drip drop
 ---------
 
-A very simple rain effect can be obtained by having small growing rings
+Rain effect can be obtained by having small growing rings
 randomly positioned over a figure. Of course, they won't grow forever since the
 wave is supposed to damp with time. To simulate that, we can use a more and
 more transparent color as the ring is growing, up to the point where it is no
@@ -603,7 +603,7 @@ is almost transparent.
 
 Now, we need to write the update function for our animation. We know that at
 each time step each ring should grow and become more transparent while the 
-largest ring should be totally transparent and thus removed. Of course, we won't 
+largest ring should be transparent and thus removed. Of course, we won't 
 actually remove the largest ring but re-use it to set a new ring at a new random
 position, with nominal size and color. Hence, we keep the number of rings
 constant.
@@ -725,7 +725,7 @@ can handle. Fortunately, there is the `basemap
 of the `cartopy <https://scitools.org.uk/cartopy/docs/latest/>`_ project) that is really
 simple to install and to use. First step is to define a projection to draw the
 earth onto a screen (there exists many different projections) and we'll stick
-to the `mill` projection which is rather standard for non-specialist like me.
+to the `mill` projection which is standard for non-specialist like me.
 
 
 .. code:: python
